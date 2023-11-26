@@ -48,7 +48,7 @@
                         <button type="button" class="_btn_share mt-3" data-bs-toggle="modal" data-bs-target="#share" @click="shareLink"><i class="fa-solid fa-share-nodes"></i>Share</button>
                         <!-- <a href="//telegram.org">Telegram.com</a> :href="download_link"-->
                         <a :href="download_link" class="btn_download" target="_blank">Download</a>
-                        <span>Total Download: 9999</span>
+                        <span>Total Download: {{ counter }}</span>
 
                         <!-- Modal -->
                         <div class="modal fade" id="share" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -153,6 +153,7 @@ export default {
             product_name: '',
             description: '',
             thumnail_img: '',
+            counter: 0,
             download_link: '',
             fullUrl: '',
         };
@@ -187,7 +188,9 @@ export default {
                 this.product_name = response.data.product_name;
                 this.thumnail_img = response.data.thumnail_img;
                 this.download_link = response.data.download_link;
+                this.counter       = response.data.counter;
                 $(".description").html(response.data.description);
+
                 this.popularProduct(response.data.category_slug);
 
             } catch (error) {

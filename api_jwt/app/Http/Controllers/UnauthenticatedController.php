@@ -201,7 +201,7 @@ class UnauthenticatedController extends Controller
     public function getProductrow(Request $request)
     {
 
-        $products     = Product::where('slug', $request->slug)->select('product.id', 'product.name', 'description', 'thumnail_img', 'product.download_link')->first();
+        $products     = Product::where('slug', $request->slug)->select('product.counter','product.id', 'product.name', 'description', 'thumnail_img', 'product.download_link')->first();
         $proCategorys = ProductCategory::where('product_id', $products->id)
             ->select('categorys.id', 'categorys.name', 'categorys.slug')
             ->join('categorys', 'categorys.id', '=', 'produc_categories.category_id')
@@ -214,6 +214,16 @@ class UnauthenticatedController extends Controller
         $data['category_id']   = $proCategorys->id;
         $data['category_slug'] = $proCategorys->slug;
         $data['category_name'] = $proCategorys->name;
+        $data['counter']       = $products->counter;
+
+    
+        $product = Product::find($products->id);
+        $product->counter += 1250;
+        //Product::where('id', $products->id)->update(['counter' => $updateCounter]);
+        $product->save();
+       
+
+
         //dd($data);
         return response()->json($data, 200);
     }

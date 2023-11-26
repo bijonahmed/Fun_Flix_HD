@@ -77,7 +77,7 @@
                                         <button type="button" class="_btn_share mt-3" data-bs-toggle="modal" data-bs-target="#share" @click="shareLink"><i class="fa-solid fa-share-nodes"></i>Share</button>
 
                                         <div class="mt-2">
-                                            <span class="me-3">Total Download: 9999</span>
+                                            <span class="me-3">Total Download: {{ counter }}</span>
                                             <span>Total View: 100k</span>
                                         </div>
 
@@ -211,6 +211,7 @@ export default {
             description: '',
             thumnail_img: '',
             download_link: '',
+            counter: 0,
             fullUrl: '',
             loading: false,
             page: 1,
@@ -250,6 +251,7 @@ export default {
                 this.product_name = response.data.product_name;
                 this.thumnail_img = response.data.thumnail_img;
                 this.download_link = response.data.download_link;
+                this.counter = response.data.counter;
                 $(".description").html(response.data.description);
             } catch (error) {
                 console.error('Error loading more data', error);
@@ -301,6 +303,7 @@ export default {
                 this.product_name = response.data.product_name;
                 this.thumnail_img = response.data.thumnail_img;
                 this.download_link = response.data.download_link;
+                this.counter = response.data.counter;
                 $(".description").html(response.data.description);
                 this.popularProduct(response.data.category_slug);
 

@@ -2,106 +2,106 @@
   {
     "name": "apps",
     "path": "/apps",
-    "component": "F:\\\\Server\\\\htdocs\\\\Fun_Flix_HD\\\\frontend\\\\pages\\\\apps.vue",
+    "component": "F:\\\\Server\\\\htdocs\\\\fun_flix_hd\\\\client\\\\pages\\\\apps.vue",
     "chunkName": "pages/apps",
-    "_name": "_5e683dec"
+    "_name": "_2ba733b1"
   },
   {
     "name": "create-identity",
     "path": "/create-identity",
-    "component": "F:\\\\Server\\\\htdocs\\\\Fun_Flix_HD\\\\frontend\\\\pages\\\\create-identity.vue",
+    "component": "F:\\\\Server\\\\htdocs\\\\fun_flix_hd\\\\client\\\\pages\\\\create-identity.vue",
     "chunkName": "pages/create-identity",
-    "_name": "_00ccf6f2"
+    "_name": "_6c8c5900"
   },
   {
     "name": "login",
     "path": "/login",
-    "component": "F:\\\\Server\\\\htdocs\\\\Fun_Flix_HD\\\\frontend\\\\pages\\\\login.vue",
+    "component": "F:\\\\Server\\\\htdocs\\\\fun_flix_hd\\\\client\\\\pages\\\\login.vue",
     "chunkName": "pages/login",
-    "_name": "_55fc7881"
+    "_name": "_568b7aba"
   },
   {
     "name": "phrase",
     "path": "/phrase",
-    "component": "F:\\\\Server\\\\htdocs\\\\Fun_Flix_HD\\\\frontend\\\\pages\\\\phrase.vue",
+    "component": "F:\\\\Server\\\\htdocs\\\\fun_flix_hd\\\\client\\\\pages\\\\phrase.vue",
     "chunkName": "pages/phrase",
-    "_name": "_07c2f9d1"
+    "_name": "_19143eb8"
   },
   {
     "name": "privacy-alert",
     "path": "/privacy-alert",
-    "component": "F:\\\\Server\\\\htdocs\\\\Fun_Flix_HD\\\\frontend\\\\pages\\\\privacy-alert.vue",
+    "component": "F:\\\\Server\\\\htdocs\\\\fun_flix_hd\\\\client\\\\pages\\\\privacy-alert.vue",
     "chunkName": "pages/privacy-alert",
-    "_name": "_26c21cef"
+    "_name": "_972853b0"
   },
   {
     "name": "recover-identity",
     "path": "/recover-identity",
-    "component": "F:\\\\Server\\\\htdocs\\\\Fun_Flix_HD\\\\frontend\\\\pages\\\\recover-identity.vue",
+    "component": "F:\\\\Server\\\\htdocs\\\\fun_flix_hd\\\\client\\\\pages\\\\recover-identity.vue",
     "chunkName": "pages/recover-identity",
-    "_name": "_5f6bdb1f"
+    "_name": "_4d552974"
   },
   {
     "name": "update-password",
     "path": "/update-password",
-    "component": "F:\\\\Server\\\\htdocs\\\\Fun_Flix_HD\\\\frontend\\\\pages\\\\update-password.vue",
+    "component": "F:\\\\Server\\\\htdocs\\\\fun_flix_hd\\\\client\\\\pages\\\\update-password.vue",
     "chunkName": "pages/update-password",
-    "_name": "_76745592"
+    "_name": "_e233b7a0"
   },
   {
     "name": "category-category-list",
     "path": "/category/category-list",
-    "component": "F:\\\\Server\\\\htdocs\\\\Fun_Flix_HD\\\\frontend\\\\pages\\\\category\\\\category-list.vue",
+    "component": "F:\\\\Server\\\\htdocs\\\\fun_flix_hd\\\\client\\\\pages\\\\category\\\\category-list.vue",
     "chunkName": "pages/category/category-list",
-    "_name": "_5de235e7"
+    "_name": "_18647be0"
   },
   {
     "name": "category-download",
     "path": "/category/download",
-    "component": "F:\\\\Server\\\\htdocs\\\\Fun_Flix_HD\\\\frontend\\\\pages\\\\category\\\\download.vue",
+    "component": "F:\\\\Server\\\\htdocs\\\\fun_flix_hd\\\\client\\\\pages\\\\category\\\\download.vue",
     "chunkName": "pages/category/download",
-    "_name": "_30e5181e"
+    "_name": "_52a98af6"
   },
   {
     "name": "course-coursedetails",
     "path": "/course/coursedetails",
-    "component": "F:\\\\Server\\\\htdocs\\\\Fun_Flix_HD\\\\frontend\\\\pages\\\\course\\\\coursedetails.vue",
+    "component": "F:\\\\Server\\\\htdocs\\\\fun_flix_hd\\\\client\\\\pages\\\\course\\\\coursedetails.vue",
     "chunkName": "pages/course/coursedetails",
-    "_name": "_8779cf38"
+    "_name": "_0860889d"
   },
   {
     "name": "course-download",
     "path": "/course/download",
-    "component": "F:\\\\Server\\\\htdocs\\\\Fun_Flix_HD\\\\frontend\\\\pages\\\\course\\\\download.vue",
+    "component": "F:\\\\Server\\\\htdocs\\\\fun_flix_hd\\\\client\\\\pages\\\\course\\\\download.vue",
     "chunkName": "pages/course/download",
-    "_name": "_c123770a"
+    "_name": "_1957d4a2"
   },
   {
     "name": "games-games-list",
     "path": "/games/games-list",
-    "component": "F:\\\\Server\\\\htdocs\\\\Fun_Flix_HD\\\\frontend\\\\pages\\\\games\\\\games-list.vue",
+    "component": "F:\\\\Server\\\\htdocs\\\\fun_flix_hd\\\\client\\\\pages\\\\games\\\\games-list.vue",
     "chunkName": "pages/games/games-list",
-    "_name": "_93f125fa"
+    "_name": "_794fe1bc"
   },
   {
     "name": "videos-videodetails",
     "path": "/videos/videodetails",
-    "component": "F:\\\\Server\\\\htdocs\\\\Fun_Flix_HD\\\\frontend\\\\pages\\\\videos\\\\videodetails.vue",
+    "component": "F:\\\\Server\\\\htdocs\\\\fun_flix_hd\\\\client\\\\pages\\\\videos\\\\videodetails.vue",
     "chunkName": "pages/videos/videodetails",
-    "_name": "_57eee257"
+    "_name": "_b693f204"
   },
   {
     "name": "videos-watch",
     "path": "/videos/watch",
-    "component": "F:\\\\Server\\\\htdocs\\\\Fun_Flix_HD\\\\frontend\\\\pages\\\\videos\\\\watch.vue",
+    "component": "F:\\\\Server\\\\htdocs\\\\fun_flix_hd\\\\client\\\\pages\\\\videos\\\\watch.vue",
     "chunkName": "pages/videos/watch",
-    "_name": "_23e18d0f"
+    "_name": "_9ce97370"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "F:\\\\Server\\\\htdocs\\\\Fun_Flix_HD\\\\frontend\\\\pages\\\\index.vue",
+    "component": "F:\\\\Server\\\\htdocs\\\\fun_flix_hd\\\\client\\\\pages\\\\index.vue",
     "chunkName": "pages/index",
-    "_name": "_e756552c"
+    "_name": "_e63850ba"
   }
 ]

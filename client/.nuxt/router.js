@@ -4,21 +4,21 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _5e683dec = () => interopDefault(import('..\\pages\\apps.vue' /* webpackChunkName: "pages/apps" */))
-const _00ccf6f2 = () => interopDefault(import('..\\pages\\create-identity.vue' /* webpackChunkName: "pages/create-identity" */))
-const _55fc7881 = () => interopDefault(import('..\\pages\\login.vue' /* webpackChunkName: "pages/login" */))
-const _07c2f9d1 = () => interopDefault(import('..\\pages\\phrase.vue' /* webpackChunkName: "pages/phrase" */))
-const _26c21cef = () => interopDefault(import('..\\pages\\privacy-alert.vue' /* webpackChunkName: "pages/privacy-alert" */))
-const _5f6bdb1f = () => interopDefault(import('..\\pages\\recover-identity.vue' /* webpackChunkName: "pages/recover-identity" */))
-const _76745592 = () => interopDefault(import('..\\pages\\update-password.vue' /* webpackChunkName: "pages/update-password" */))
-const _5de235e7 = () => interopDefault(import('..\\pages\\category\\category-list.vue' /* webpackChunkName: "pages/category/category-list" */))
-const _30e5181e = () => interopDefault(import('..\\pages\\category\\download.vue' /* webpackChunkName: "pages/category/download" */))
-const _8779cf38 = () => interopDefault(import('..\\pages\\course\\coursedetails.vue' /* webpackChunkName: "pages/course/coursedetails" */))
-const _c123770a = () => interopDefault(import('..\\pages\\course\\download.vue' /* webpackChunkName: "pages/course/download" */))
-const _93f125fa = () => interopDefault(import('..\\pages\\games\\games-list.vue' /* webpackChunkName: "pages/games/games-list" */))
-const _57eee257 = () => interopDefault(import('..\\pages\\videos\\videodetails.vue' /* webpackChunkName: "pages/videos/videodetails" */))
-const _23e18d0f = () => interopDefault(import('..\\pages\\videos\\watch.vue' /* webpackChunkName: "pages/videos/watch" */))
-const _e756552c = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
+const _2ba733b1 = () => interopDefault(import('..\\pages\\apps.vue' /* webpackChunkName: "pages/apps" */))
+const _6c8c5900 = () => interopDefault(import('..\\pages\\create-identity.vue' /* webpackChunkName: "pages/create-identity" */))
+const _568b7aba = () => interopDefault(import('..\\pages\\login.vue' /* webpackChunkName: "pages/login" */))
+const _19143eb8 = () => interopDefault(import('..\\pages\\phrase.vue' /* webpackChunkName: "pages/phrase" */))
+const _972853b0 = () => interopDefault(import('..\\pages\\privacy-alert.vue' /* webpackChunkName: "pages/privacy-alert" */))
+const _4d552974 = () => interopDefault(import('..\\pages\\recover-identity.vue' /* webpackChunkName: "pages/recover-identity" */))
+const _e233b7a0 = () => interopDefault(import('..\\pages\\update-password.vue' /* webpackChunkName: "pages/update-password" */))
+const _18647be0 = () => interopDefault(import('..\\pages\\category\\category-list.vue' /* webpackChunkName: "pages/category/category-list" */))
+const _52a98af6 = () => interopDefault(import('..\\pages\\category\\download.vue' /* webpackChunkName: "pages/category/download" */))
+const _0860889d = () => interopDefault(import('..\\pages\\course\\coursedetails.vue' /* webpackChunkName: "pages/course/coursedetails" */))
+const _1957d4a2 = () => interopDefault(import('..\\pages\\course\\download.vue' /* webpackChunkName: "pages/course/download" */))
+const _794fe1bc = () => interopDefault(import('..\\pages\\games\\games-list.vue' /* webpackChunkName: "pages/games/games-list" */))
+const _b693f204 = () => interopDefault(import('..\\pages\\videos\\videodetails.vue' /* webpackChunkName: "pages/videos/videodetails" */))
+const _9ce97370 = () => interopDefault(import('..\\pages\\videos\\watch.vue' /* webpackChunkName: "pages/videos/watch" */))
+const _e63850ba = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
 
@@ -33,63 +33,63 @@ export const routerOptions = {
 
   routes: [{
     path: "/apps",
-    component: _5e683dec,
+    component: _2ba733b1,
     name: "apps"
   }, {
     path: "/create-identity",
-    component: _00ccf6f2,
+    component: _6c8c5900,
     name: "create-identity"
   }, {
     path: "/login",
-    component: _55fc7881,
+    component: _568b7aba,
     name: "login"
   }, {
     path: "/phrase",
-    component: _07c2f9d1,
+    component: _19143eb8,
     name: "phrase"
   }, {
     path: "/privacy-alert",
-    component: _26c21cef,
+    component: _972853b0,
     name: "privacy-alert"
   }, {
     path: "/recover-identity",
-    component: _5f6bdb1f,
+    component: _4d552974,
     name: "recover-identity"
   }, {
     path: "/update-password",
-    component: _76745592,
+    component: _e233b7a0,
     name: "update-password"
   }, {
     path: "/category/category-list",
-    component: _5de235e7,
+    component: _18647be0,
     name: "category-category-list"
   }, {
     path: "/category/download",
-    component: _30e5181e,
+    component: _52a98af6,
     name: "category-download"
   }, {
     path: "/course/coursedetails",
-    component: _8779cf38,
+    component: _0860889d,
     name: "course-coursedetails"
   }, {
     path: "/course/download",
-    component: _c123770a,
+    component: _1957d4a2,
     name: "course-download"
   }, {
     path: "/games/games-list",
-    component: _93f125fa,
+    component: _794fe1bc,
     name: "games-games-list"
   }, {
     path: "/videos/videodetails",
-    component: _57eee257,
+    component: _b693f204,
     name: "videos-videodetails"
   }, {
     path: "/videos/watch",
-    component: _23e18d0f,
+    component: _9ce97370,
     name: "videos-watch"
   }, {
     path: "/",
-    component: _e756552c,
+    component: _e63850ba,
     name: "index"
   }],
 
