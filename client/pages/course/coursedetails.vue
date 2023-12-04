@@ -1,13 +1,13 @@
 <template>
 <div>
     <TopBar />
-    <br /> <br />
+    <br><br>
     <!-- banner part start here  -->
     <div class="essential_ cat_banner">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="essential_box" style="min-height: 30vh;display: block;">
+                    <div class="essential_box eseheight">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="row essential_d ">
@@ -92,7 +92,7 @@
                             </a>
                         </div>
                         <div class="ads_img">
-                            <iframe id="200_268_dfa7banner_html_inpage_0.if" src="//s0.2mdn.net/dfp/1754321/4628264607/1695719733125/300 x 250/index.html" width="300" height="250" frameborder="0" scrolling="no" allowfullscreen="true" style="width: 300px; height: 250px;" bis_size="{&quot;x&quot;:0,&quot;y&quot;:0,&quot;w&quot;:300,&quot;h&quot;:250,&quot;abs_x&quot;:986,&quot;abs_y&quot;:1125}" bis_id="fr_zj07gcw0csd6ebqbqx5b59" bis_depth="1" bis_chainid="10"></iframe>
+                            <!-- <iframe src="//s0.2mdn.net/dfp/1754321/4628264607/1695719733125/300 x 250/index.html" width="300" height="250" frameborder="0" scrolling="no" allowfullscreen="true" style="width: 300px; height: 250px;" bis_size="{&quot;x&quot;:0,&quot;y&quot;:0,&quot;w&quot;:300,&quot;h&quot;:250,&quot;abs_x&quot;:986,&quot;abs_y&quot;:1125}" bis_id="fr_zj07gcw0csd6ebqbqx5b59" bis_depth="1" bis_chainid="10"></iframe> -->
                         </div>
                     </div>
                 </div>
@@ -217,6 +217,10 @@ export default {
 </script>
 
 <style scoped>
+.eseheight {
+    min-height: 30vh;
+    display: block
+}
 .load-more-btn {
     background-color: #3498db;
     color: #fff;

@@ -193,6 +193,7 @@ Route::group([
     Route::get('showingMoviesCatWise', [UnauthenticatedController::class, 'showingMoviesCatWise']);
     Route::get('videoPagination', [UnauthenticatedController::class, 'videoPagination']);
     Route::get('videoLoadMorePagination', [UnauthenticatedController::class, 'loadMorePagination']);
+    Route::get('catloadMorePagination', [UnauthenticatedController::class, 'loadMorePagination']);
     Route::get('filderProduct', [UnauthenticatedController::class, 'filderProduct']);
     Route::get('autocomplete', [UnauthenticatedController::class, 'autocomplete']);
     Route::get('sliders', [UnauthenticatedController::class, 'slidersImages']);

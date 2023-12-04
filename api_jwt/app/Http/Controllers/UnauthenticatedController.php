@@ -127,14 +127,14 @@ class UnauthenticatedController extends Controller
 
         $proCategorys  = ProductCategory::where('category_id', $chkCategory->id)
             ->select('product.id', 'product.download_link', 'produc_categories.product_id', 'product.name as pro_name', 'produc_categories.category_id', 'description', 'thumnail_img', 'product.slug as pro_slug')
-            ->join('product', 'product.id', '=', 'produc_categories.product_id')->limit(10)->get();
+            ->join('product', 'product.id', '=', 'produc_categories.product_id')->limit(32)->get();
 
         $result = [];
         foreach ($proCategorys as $key => $v) {
             $result[] = [
                 'id'           => $v->id,
                 'product_id'   => $v->product_id,
-                'product_name' => substr($v->pro_name, 0, 12) . '...',
+                'product_name' => $v->pro_name,// substr($v->pro_name, 0, 12) . '...',
                 'p_name'       => $v->pro_name,
                 'category_id'  => $v->category_id,
                 'download_link' => $v->download_link,
@@ -321,9 +321,10 @@ class UnauthenticatedController extends Controller
 
     public function loadMorePagination(Request $request)
     {
+        //dd($request->all());
         $chkCategory = Categorys::where('slug', $request->slug)->select('id', 'parent_id', 'name', 'slug')->first();
         //dd($chkCategory->id);
-        $perPage = 12; // Change this to the number of items per page
+        $perPage = 5; // Change this to the number of items per page
         $page = $request->input('page', 1);
         $products = ProductCategory::where('category_id', $chkCategory->id)
             ->select('product.id', 'categorys.name', 'product.slug', 'product.name as product_name', 'product.thumnail_img', 'product.download_link')
@@ -342,6 +343,8 @@ class UnauthenticatedController extends Controller
                 'pro_slug'     => $v->slug,
             ];
         }
+        
+       // dd($result);
         return response()->json(['data' => $result, 'meta' => $products]);
     }
 

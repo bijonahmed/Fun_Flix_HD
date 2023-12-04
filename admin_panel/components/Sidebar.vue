@@ -28,9 +28,6 @@
                     <li>
                         <Nuxt-link to="/ecommarce/product-list"><i class="bx bx-right-arrow-alt"></i>Product</Nuxt-link>
                     </li>
-                    <li>
-                        <Nuxt-link to="#"><i class="bx bx-right-arrow-alt"></i>Product Review</Nuxt-link>
-                    </li>
 
                     <!-- <li>
                         <Nuxt-link to="#"><i class="bx bx-right-arrow-alt"></i>Seller Product</Nuxt-link>
@@ -308,19 +305,13 @@
         </span>
         <span v-else-if="user.role_id==2">
             <li>
-                <a href="#" class="has-arrow nav-link dropdown-toggle" id="submenuDropdown_35" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bx bx-category"></i>
-                    <div class="menu-title">Employee Access Value</div>
-                </a>
-                <ul class="menu dropdown-menu" aria-labelledby="submenuDropdown_35" style="width:100%;">
-                    <li>
-                        <Nuxt-link to="/profile"><i class="bx bx-right-arrow-alt"></i>View Profile</Nuxt-link>
-                    </li>
-                    <li>
-                        <Nuxt-link to="/employee/leave-approval-list"><i class="bx bx-right-arrow-alt"></i>Leave Approval List</Nuxt-link>
-                    </li>
-                </ul>
+                <Nuxt-link to="/ecommarce/product-list"><i class="bx bx-right-arrow-alt"></i>Product</Nuxt-link>
             </li>
+            <li>
+                <Nuxt-link to="/ecommarce/category-list"><i class="bx bx-right-arrow-alt"></i>Category</Nuxt-link>
+            </li>
+
+            
         </span>
     </ul>
 

@@ -4,7 +4,7 @@
     <TopBar />
     <Slider />
     <!-- <NewsSlider /> -->
-    <TopFreeApps />
+    <!-- <TopFreeApps /> -->
     <!-- <EssentialApps /> -->
     <Videos />
     <!-- <Courses /> -->

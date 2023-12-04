@@ -419,7 +419,7 @@ export default {
             this.onFileSelected();
             const file = event.target.files[0];
             this.previewUrl = URL.createObjectURL(file);
-            this.checkImageDimensionsThunbnail(file);
+           // this.checkImageDimensionsThunbnail(file);
         },
         checkImageDimensionsThunbnail(file) {
             const reader = new FileReader();

@@ -80,7 +80,7 @@ class ProductController extends Controller
             'vat_status'                 => !empty($request->vat_status) ? $request->vat_status : "",
             'tax'                        => !empty($request->tax) ? $request->tax : 0,
             'tax_status'                 => !empty($request->tax_status) ? $request->tax_status : "",
-            'status'                     => !empty($request->status) ? $request->status : "",
+            'status'                     => 1,//!empty($request->status) ? $request->status : "",
             'entry_by'                   => $this->userid
         );
         if (!empty($request->file('files'))) {

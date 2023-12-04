@@ -27,7 +27,6 @@
                     <div class="card border-top border-0 border-4 border-info">
                         <div class="card-body">
                             <div class="border p-4 rounded">
-                               
 
                                 <form @submit.prevent="saveData()" id="formrest" class="forms-sample" enctype="multipart/form-data">
 
@@ -89,16 +88,14 @@
                                         </div>
                                     </div>
 
-
                                     <div class="row mb-3">
-                                            <div class="col-sm-3">
-                                                <span class="mb-0">Profile Picture</span>
-                                            </div>
-                                            <div class="col-sm-9 text-secondary">
-                                                <input type="file" ref="file" @change="onFileSelected" class="form-control" id="file" name="file" />
-                                            </div>
+                                        <div class="col-sm-3">
+                                            <span class="mb-0">Profile Picture</span>
                                         </div>
-
+                                        <div class="col-sm-9 text-secondary">
+                                            <input type="file" ref="file" @change="onFileSelected" class="form-control" id="file" name="file" />
+                                        </div>
+                                    </div>
 
                                     <div class="row mb-3">
                                         <label for="inputpassword_confirmation2" class="col-sm-3 col-form-label">Status</label>
@@ -163,8 +160,9 @@ export default {
         },
         saveData() {
             const formData = new FormData();
-            let role_id =  $(".role_id").val();
-            formData.append('id', this.insertdata.id);
+            let role_id = $(".role_id").val();
+            const userid = '';
+            formData.append('id', userid);
             formData.append('file', this.file);
             formData.append('role_id', role_id);
             formData.append('name', this.insertdata.name);

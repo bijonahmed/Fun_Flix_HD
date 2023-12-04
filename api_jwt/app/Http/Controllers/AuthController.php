@@ -22,6 +22,8 @@ class AuthController extends Controller
     }
     public function login(Request $request)
     {
+       // dd($request->all());
+
         $this->validateLogin($request);
         $credentials = request(['email', 'password']);
         if (!$token = auth('api')->attempt($credentials)) {
@@ -54,6 +56,7 @@ class AuthController extends Controller
     public function me()
     {
         return response()->json($this->guard('api')->user());
+
     }
     public function logout()
     {

@@ -7,13 +7,6 @@
     "_name": "_2ba733b1"
   },
   {
-    "name": "create-identity",
-    "path": "/create-identity",
-    "component": "F:\\\\Server\\\\htdocs\\\\fun_flix_hd\\\\client\\\\pages\\\\create-identity.vue",
-    "chunkName": "pages/create-identity",
-    "_name": "_6c8c5900"
-  },
-  {
     "name": "login",
     "path": "/login",
     "component": "F:\\\\Server\\\\htdocs\\\\fun_flix_hd\\\\client\\\\pages\\\\login.vue",

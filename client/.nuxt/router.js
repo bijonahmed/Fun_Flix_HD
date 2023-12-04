@@ -5,7 +5,6 @@ import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
 const _2ba733b1 = () => interopDefault(import('..\\pages\\apps.vue' /* webpackChunkName: "pages/apps" */))
-const _6c8c5900 = () => interopDefault(import('..\\pages\\create-identity.vue' /* webpackChunkName: "pages/create-identity" */))
 const _568b7aba = () => interopDefault(import('..\\pages\\login.vue' /* webpackChunkName: "pages/login" */))
 const _19143eb8 = () => interopDefault(import('..\\pages\\phrase.vue' /* webpackChunkName: "pages/phrase" */))
 const _972853b0 = () => interopDefault(import('..\\pages\\privacy-alert.vue' /* webpackChunkName: "pages/privacy-alert" */))
@@ -35,10 +34,6 @@ export const routerOptions = {
     path: "/apps",
     component: _2ba733b1,
     name: "apps"
-  }, {
-    path: "/create-identity",
-    component: _6c8c5900,
-    name: "create-identity"
   }, {
     path: "/login",
     component: _568b7aba,

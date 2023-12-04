@@ -1,6 +1,6 @@
 <template>
 <div>
-
+    <br>
     <!-- slider part start here  -->
     <div class="slider_sec">
         <div id="loader-main" v-show="showLoader">

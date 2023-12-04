@@ -6,14 +6,17 @@ export default {
     htmlAttrs: {
       lang: "en",
     },
+ 
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "" },
+      { hid: "description", name: "description", content: `Dive into the world of entertainment and education at FunFlixHD.com! 
+      Explore the latest movies, cutting-edge software, thrilling games, 
+      and enriching courses. Your gateway to endless possibilities for leisure and learning awaits!` },
       { name: "format-detection", content: "telephone=no" },
     ],
     link: [
-      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      { rel: "icon", type: "image/x-icon", href: "/logo.png" },
       { rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"},
       { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" },
       { rel: "stylesheet", href: "https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" },
@@ -82,9 +85,9 @@ export default {
   },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: "http://127.0.0.1:8000/api",
-    // admin link : http://admin.funflixhd.com
-    //baseURL: "https://api.funflixhd.com//api",
+   //baseURL: "http://127.0.0.1:8000/api",
+   //admin link : http://admin.funflixhd.com
+   baseURL: "https://api.funflixhd.com/api",
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
