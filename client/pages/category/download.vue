@@ -70,10 +70,13 @@
                                                 </div>
                                             </div>
                                             <div class="copy_link">
-                                                <h6 style="color: #000;">Or copy link : </h6>
+                                                <center>
+                                                    <h3 id="copymsg"></h3>
+                                                </center>
+                                                <h6 style="color: #000;">Or copy link :</h6>
                                                 <div class="input_box">
-                                                    <input type="text" v-model="fullUrl">
-                                                    <button type="button">Copy </button>
+                                                    <input type="text" v-model="download_link" id="linkInput">
+                                                    <button type="button" @click="copyLink()">Copy </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -103,7 +106,7 @@
                         <h6>People also view </h6>
                         <div class="essential_grid _apps mb-2">
 
-                            <div class="apps_box_two" v-for="product in popularCategorys" :key="product.id">
+                            <div class="apps_box_two" v-for="(product, index) in popularCategorys" :key="index">
                                 <nuxt-link :to="'/category/download?slug=' + product.pro_slug" target="_blank">
                                     <div class="s_img_box">
                                         <div class="blur_box" style=" background-image: var(--theme-noise-image-to-linear-gradient), linear-gradient(transparent, transparent), url(..//images/software_images/media_encoder.jpg);">
@@ -158,9 +161,42 @@ export default {
             fullUrl: '',
         };
     },
+    watch: {
+        async $route(to, from) {
+            try {
+                const slug = this.$route.query.slug;
 
-    head: {
-        title: 'Download Software',
+                this.showLoader = true;
+                const response = await this.$axios.get('/unauthenticate/getProductrow', {
+                    params: {
+                        slug: this.$route.query.slug
+                    },
+                });
+                this.showLoader = false;
+                this.product_name = response.data.product_name;
+                this.thumnail_img = response.data.thumnail_img;
+                this.download_link = response.data.download_link;
+                this.counter = response.data.counter;
+                $(".description").html(response.data.description);
+                this.popularProduct(response.data.category_slug);
+
+            } catch (error) {
+                // console.error('Error fetching data:', error);
+            }
+        },
+    },
+    head() {
+        const pageTitle = `Download - ${this.$route.query.slug || ''}`;
+        const pageDescription = this.product_name;
+        const name = this.$route.query.slug || this.product_name;
+        return {
+            title: pageTitle,
+            meta: [{
+                hid: name,
+                name: name,
+                content: pageDescription,
+            }, ],
+        };
     },
     mounted() {
         setTimeout(() => {
@@ -172,6 +208,19 @@ export default {
 
     },
     methods: {
+        copyLink() {
+            $("#copymsg").html();
+            // Select the input field
+            const linkInput = document.getElementById('linkInput');
+            linkInput.select();
+            try {
+                document.execCommand('copy');
+                $("#copymsg").html("Link copied!");
+            } catch (err) {
+                console.error('Unable to copy to clipboard:', err);
+                $("#copymsg").html("Copy to clipboard failed. Please copy the link manually.");
+            }
+        },
         shareLink() {
             const path = window.location.href;
             // console.log(path);
@@ -188,9 +237,8 @@ export default {
                 this.product_name = response.data.product_name;
                 this.thumnail_img = response.data.thumnail_img;
                 this.download_link = response.data.download_link;
-                this.counter       = response.data.counter;
+                this.counter = response.data.counter;
                 $(".description").html(response.data.description);
-
                 this.popularProduct(response.data.category_slug);
 
             } catch (error) {

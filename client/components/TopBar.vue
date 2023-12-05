@@ -84,7 +84,8 @@ export default {
             let parent_id = $(".parent").val();
             let selected_slug = $(".selected_slug").val();
             if (parent_id == 1 || parent_id == 2) {
-                this.$router.push('/category/download?slug=' + selected_slug);
+                alert(selected_slug);
+                 this.$router.push('/category/download?slug=' + selected_slug);
             }
 
             if (parent_id == 3) {

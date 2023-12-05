@@ -51,7 +51,7 @@
                                             <nuxt-link :to="'/category/download?slug=' + item.pro_slug" type="button" class="btn_download btn-sm"><img src="/images/btn_download.png" alt=""> </nuxt-link>
 
                                         </div>
-                                        <div class=""><button type="button" data-bs-toggle="modal" data-bs-target="#share" class="btn_search btn-sm share_btns"><img src="/images/share-100.png" alt=""> </button></div>
+                                        <div class=""><button type="button" data-bs-toggle="modal" data-bs-target="#share" class="btn_search btn-sm share_btns" @click="sharelink(item.download_link)"><img src="/images/share-100.png" alt=""> </button></div>
                                     </div>
                                 </div>
                             </div>
@@ -84,7 +84,40 @@
         </div>
     </section>
     <!-- new apps part end here  -->
+ <!-- ===================== Modal List  ======================  -->
+ <div class="modal fade" id="share" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="share_options">
+                        <div class="d-flex justify-content-end">
+                            <div>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                        </div>
+                        <div>
+                            <center><h3 id="copymsg"></h3></center>
+                            <h6 style="color: #000;">Share this with your social Community</h6>
+                            <div class="socials">
+                                <a href="https:/web.whatsapp.com" target="_blank"><img src="/images/whatsapp-100.png" alt=""></a>
+                                <a href="https://www.messenger.com/" target="_blank"><img src="/images/facebook-messenger-100.png" alt=""></a>
+                                <a href="https://web.telegram.org/" target="_blank"><img src="/images/telegram.png" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="copy_link">
+                            <h6 style="color: #000;">Or copy link : </h6>
+                            <div class="input_box">
+                                <input type="text" v-model="downloadlink" id="linkInput">
+                                <button type="button" @click="copyLink()">Copy </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+            </div>
+        </div>
+    </div>
+    <!-- end  -->
     <Support />
     <Footer />
 </div>
@@ -104,6 +137,7 @@ export default {
     },
     data() {
         return {
+            downloadlink: '',
             loading: false,
             showLoader: false,
             categoryname: '',
@@ -115,7 +149,10 @@ export default {
     watch: {
         async $route(to, from) {
             try {
-                //const slug = this.$route.query.slug;
+                const slug = this.$route.query.slug;
+
+               // alert(slug);
+
                 this.showLoader = true;
                 const response = await this.$axios.get('/unauthenticate/findCategorys', {
                     params: {
@@ -145,6 +182,19 @@ export default {
 
     },
     methods: {
+        copyLink() {
+            $("#copymsg").html();
+            // Select the input field
+            const linkInput = document.getElementById('linkInput');
+            linkInput.select();
+            try {
+                document.execCommand('copy');
+                $("#copymsg").html("Link copied!");
+            } catch (err) {
+                console.error('Unable to copy to clipboard:', err);
+                $("#copymsg").html("Copy to clipboard failed. Please copy the link manually.");
+            }
+        },
         async fetchcatData() {
             try {
                 const response = await this.$axios.get('/unauthenticate/findCategorys', {
@@ -179,11 +229,9 @@ export default {
                 this.loading = false;
             }
         },
-        shareLink() {
-            const path = window.location.href;
-            // console.log(path);
-            this.fullUrl = path;
-
+        sharelink(download_link) {
+            console.log("download_link: " + download_link);
+            this.downloadlink = download_link;
         },
 
         //end 

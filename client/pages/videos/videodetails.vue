@@ -69,17 +69,13 @@
                 <div class="col-md-2">
                     <div class="ads_sec mt-0">
                         <div class="ads_img">
-                            <a href="https://pec-shopping.com">
+                            <a href="#">
                                 <img src="/images/Neutral_Modern Elegant_Watch_Instagram_Post.png" alt="">
                             </a>
                         </div>
+                       
                         <div class="ads_img">
-                            <a href="https://pec-shopping.com">
-                                <img src="/images/300x600.png" class="img-fluid" loading="lazy" alt="">
-                            </a>
-                        </div>
-                        <div class="ads_img">
-                            <a href="https://pec-shopping.com">
+                            <a href="#">
                                 <img src="/images/Neutral_Modern Elegant_Watch_Instagram_Post.png" alt="">
                             </a>
                         </div>

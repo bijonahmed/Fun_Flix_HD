@@ -46,22 +46,21 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Title</th>
-                                    <th scope="col">Category</th>
-                                    <th scope="col">Size</th>
+                                    <!-- <th scope="col">Category</th>
+                                    <th scope="col">Size</th> -->
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="item in items" :key="item.id">
                                     <th scope="row"><img src="/images/file-explorer-new-100.png" class="img-fluid me-2" loading="lazy" width="20px" alt="">
-                                       {{ item.p_name }}</th>
-                                    <td>Web Development</td>
-
-                                    <td>3.5 GB</td>
+                                        {{ item.p_name }}</th>
+                                    <!-- <td>Web Development</td>
+                                    <td>3.5 GB</td> -->
                                     <td>
                                         <div class="btn-group ">
                                             <div class=""><a :href="item.download_link" target="_blank" type="button" class="btn_download btn-sm"><img src="/images/rom-cloud-100(3).png" alt=""> </a></div>
-                                            <div class=""><button type="button" data-bs-toggle="modal" data-bs-target="#share" class="btn_search btn-sm"><img src="/images//share-100.png" alt=""> </button></div>
+                                            <div class=""><button type="button" data-bs-toggle="modal" data-bs-target="#share" class="btn_search btn-sm" @click="sharelink(item.download_link)"><img src="/images//share-100.png" alt=""> </button></div>
                                         </div>
 
                                     </td>
@@ -80,17 +79,11 @@
                 <div class="col-md-2">
                     <div class="ads_sec mt-0 cat_page_ads" style="padding-right: 40px; position: relative;">
                         <div class="ads_img">
-
-                            <a href="https://pec-shopping.com">
+                            <a href="#">
                                 <img src="/images/Neutral_Modern Elegant_Watch_Instagram_Post.png" alt="">
                             </a>
                         </div>
-                        <div class="ads_img">
 
-                            <a href="https://pec-shopping.com">
-                                <img src="/images//300x600.png" class="img-fluid" loading="lazy" alt="">
-                            </a>
-                        </div>
                         <div class="ads_img">
                             <!-- <iframe src="//s0.2mdn.net/dfp/1754321/4628264607/1695719733125/300 x 250/index.html" width="300" height="250" frameborder="0" scrolling="no" allowfullscreen="true" style="width: 300px; height: 250px;" bis_size="{&quot;x&quot;:0,&quot;y&quot;:0,&quot;w&quot;:300,&quot;h&quot;:250,&quot;abs_x&quot;:986,&quot;abs_y&quot;:1125}" bis_id="fr_zj07gcw0csd6ebqbqx5b59" bis_depth="1" bis_chainid="10"></iframe> -->
                         </div>
@@ -99,9 +92,39 @@
             </div>
         </div>
     </div>
-    <!-- apps grid part end here  -->
+    <!-- ===================== Modal List  ======================  -->
+    <div class="modal fade" id="share" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="share_options">
+                        <div class="d-flex justify-content-end">
+                            <div>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                        </div>
+                        <div>
+                            <center><h3 id="copymsg"></h3></center>
+                            <h6 style="color: #000;">Share this with your social Community</h6>
+                            <div class="socials">
+                                <a href="https:/web.whatsapp.com" target="_blank"><img src="/images/whatsapp-100.png" alt=""></a>
+                                <a href="https://www.messenger.com/" target="_blank"><img src="/images/facebook-messenger-100.png" alt=""></a>
+                                <a href="https://web.telegram.org/" target="_blank"><img src="/images/telegram.png" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="copy_link">
+                            <h6 style="color: #000;">Or copy link : </h6>
+                            <div class="input_box">
+                                <input type="text" v-model="downloadlink" id="linkInput">
+                                <button type="button" @click="copyLink()">Copy </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    <!-- apps grid part end here  -->
+            </div>
+        </div>
+    </div>
     <!-- end  -->
     <Support />
     <Footer />
@@ -124,6 +147,7 @@ export default {
     },
     data() {
         return {
+            downloadlink: '',
             categoryname: '',
             popularCategorys: [],
             showLoader: false,
@@ -168,6 +192,23 @@ export default {
 
     },
     methods: {
+        copyLink() {
+            $("#copymsg").html();
+            // Select the input field
+            const linkInput = document.getElementById('linkInput');
+            linkInput.select();
+            try {
+                document.execCommand('copy');
+                $("#copymsg").html("Link copied!");
+            } catch (err) {
+                console.error('Unable to copy to clipboard:', err);
+                $("#copymsg").html("Copy to clipboard failed. Please copy the link manually.");
+            }
+        },
+        sharelink(download_link) {
+            console.log("download_link: " + download_link);
+            this.downloadlink = download_link;
+        },
         async fetchcatData() {
             this.showLoader = true;
             try {
@@ -221,6 +262,7 @@ export default {
     min-height: 30vh;
     display: block
 }
+
 .load-more-btn {
     background-color: #3498db;
     color: #fff;

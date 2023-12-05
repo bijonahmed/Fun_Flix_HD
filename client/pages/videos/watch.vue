@@ -219,8 +219,18 @@ export default {
         };
     },
 
-    head: {
-        title: 'Watch HD Movie',
+    head() {
+        const pageTitle = `Download - ${this.$route.query.slug || ''}`;
+        const pageDescription = this.product_name;
+        const name = this.$route.query.slug || this.product_name;
+        return {
+            title: pageTitle,
+            meta: [{
+                hid: name,
+                name: name,
+                content: pageDescription,
+            }, ],
+        };
     },
     async mounted() {
         this.showLoader = true;
