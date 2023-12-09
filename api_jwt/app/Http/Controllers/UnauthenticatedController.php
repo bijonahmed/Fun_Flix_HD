@@ -118,41 +118,6 @@ class UnauthenticatedController extends Controller
         return response()->json($data);
     }
 
-    //filter category
-    public function findCategorys(Request $request)
-    {
-
-        $slug = $request->slug;
-        $chkCategory   = Categorys::where('slug', $slug)->select('id', 'slug', 'parent_id', 'name')->first();
-
-        $proCategorys  = ProductCategory::where('category_id', $chkCategory->id)
-            ->select('product.id', 'product.download_link', 'produc_categories.product_id', 'product.name as pro_name', 'produc_categories.category_id', 'description', 'thumnail_img', 'product.slug as pro_slug')
-            ->join('product', 'product.id', '=', 'produc_categories.product_id')->limit(32)->get();
-
-        $result = [];
-        foreach ($proCategorys as $key => $v) {
-            $result[] = [
-                'id'           => $v->id,
-                'product_id'   => $v->product_id,
-                'product_name' => $v->pro_name,// substr($v->pro_name, 0, 12) . '...',
-                'p_name'       => $v->pro_name,
-                'category_id'  => $v->category_id,
-                'download_link' => $v->download_link,
-                'thumnail_img' => url($v->thumnail_img),
-                'pro_slug'     => $v->pro_slug,
-
-            ];
-        }
-
-        $data['result']        = $result;
-        $data['pro_count']     = count($result);
-        $data['categoryname']  = $chkCategory->name;
-        $data['category_slug'] = $chkCategory->slug;
-        $data['category_id']   = $chkCategory->parent_id;
-        // dd($data);
-        return response()->json($data, 200);
-    }
-
     public function filderProduct(Request $request)
     {
         $slug = $request->slug;
@@ -201,7 +166,7 @@ class UnauthenticatedController extends Controller
     public function getProductrow(Request $request)
     {
 
-        $products     = Product::where('slug', $request->slug)->select('product.counter','product.id', 'product.name', 'description', 'thumnail_img', 'product.download_link')->first();
+        $products     = Product::where('slug', $request->slug)->select('product.counter', 'product.id', 'product.name', 'description', 'thumnail_img', 'product.download_link')->first();
         $proCategorys = ProductCategory::where('product_id', $products->id)
             ->select('categorys.id', 'categorys.name', 'categorys.slug')
             ->join('categorys', 'categorys.id', '=', 'produc_categories.category_id')
@@ -216,13 +181,10 @@ class UnauthenticatedController extends Controller
         $data['category_name'] = $proCategorys->name;
         $data['counter']       = $products->counter;
 
-    
         $product = Product::find($products->id);
         $product->counter += 1250;
         //Product::where('id', $products->id)->update(['counter' => $updateCounter]);
         $product->save();
-       
-
 
         //dd($data);
         return response()->json($data, 200);
@@ -246,66 +208,58 @@ class UnauthenticatedController extends Controller
         return response()->json($result, 200);
     }
 
-    public function defaultShowingMovies()
+    //filter category
+    public function findCategorys(Request $request)
     {
-        $categoryId = 18; //4k Movies
-        $products = ProductCategory::where('category_id', $categoryId)
-            ->select('product.id', 'categorys.name', 'product.slug', 'product.name as product_name', 'product.thumnail_img')
-            ->join('categorys', 'categorys.id', '=', 'produc_categories.category_id')
-            ->join('product', 'product.id', '=', 'produc_categories.product_id')
-            ->paginate(12);
-        //dd($products);
-
-        $result = [];
-        foreach ($products as $key => $v) {
-            $result[] = [
-                'id'           => $v->id,
-                'product_name' => substr($v->product_name, 0, 12) . '...',
-                'thumnail_img' => url($v->thumnail_img),
-                'pro_slug'     => $v->slug,
-
-            ];
-        }
-        //dd($data);
-        return response()->json($result, 200);
-    }
-
-    public function showingMoviesCatWise(Request $request)
-    {
-
-        $categoryId = 18; //4k Movies
-        $products = ProductCategory::where('category_id', $categoryId)
-            ->select('product.id', 'categorys.name', 'product.slug', 'product.name as product_name', 'product.thumnail_img')
-            ->join('categorys', 'categorys.id', '=', 'produc_categories.category_id')
-            ->join('product', 'product.id', '=', 'produc_categories.product_id')
-            ->paginate(12);
-        //dd($products);
-
-        $result = [];
-        foreach ($products as $key => $v) {
-            $result[] = [
-                'id'           => $v->id,
-                'product_name' => substr($v->product_name, 0, 12) . '...',
-                'thumnail_img' => url($v->thumnail_img),
-                'pro_slug'     => $v->slug,
-
-            ];
-        }
-        //dd($data);
-        return response()->json($result, 200);
-    }
-
-    public function videoPagination(Request $request)
-    {
-        $perPage = 12; // Change this to the number of items per page
-        $categoryId = 18; //4k Movies
+        $slug = $request->slug;
+        $perPage = 24; // Update to load 10 products at a time
         $page = $request->input('page', 1);
+        $skip = ($page - 1) * $perPage;
+        $chkCategory   = Categorys::where('slug', $slug)->select('id', 'slug', 'parent_id', 'name')->first();
+        $proCategorys  = ProductCategory::where('category_id', $chkCategory->id)
+            ->select('product.id', 'product.download_link', 'produc_categories.product_id', 'product.name as pro_name', 'produc_categories.category_id', 'description', 'thumnail_img', 'product.slug as pro_slug')
+            ->join('product', 'product.id', '=', 'produc_categories.product_id')->skip($skip)
+            ->take($perPage)
+            ->get();;
 
+        $result = [];
+        foreach ($proCategorys as $key => $v) {
+            $result[] = [
+                'id'           => $v->id,
+                'product_id'   => $v->product_id,
+                'product_name' => $v->pro_name, // substr($v->pro_name, 0, 12) . '...',
+                'p_name'       => $v->pro_name,
+                'category_id'  => $v->category_id,
+                'download_link' => $v->download_link,
+                'thumnail_img' => url($v->thumnail_img),
+                'pro_slug'     => $v->pro_slug,
+
+            ];
+        }
+
+        $data['result']        = $result;
+        $data['pro_count']     = count($result);
+        $data['categoryname']  = $chkCategory->name;
+        $data['category_slug'] = $chkCategory->slug;
+        $data['category_id']   = $chkCategory->parent_id;
+        // dd($data);
+        return response()->json($data, 200);
+    }
+
+    //For Home Pages Load More....
+    public function defaultShowingMoviesHome(Request $request)
+    {
+        $perPage = 24; // Update to load 10 products at a time
+        $page = $request->input('page', 1);
+        $categoryId = 19; // 4k Movies
+        $skip = ($page - 1) * $perPage;
         $products = ProductCategory::where('category_id', $categoryId)
             ->select('product.id', 'categorys.name', 'product.slug', 'product.name as product_name', 'product.thumnail_img')
             ->join('categorys', 'categorys.id', '=', 'produc_categories.category_id')
             ->join('product', 'product.id', '=', 'produc_categories.product_id')
-            ->paginate($perPage, ['*'], 'page', $page);
+            ->skip($skip)
+            ->take($perPage)
+            ->get();
 
         $result = [];
         foreach ($products as $key => $v) {
@@ -316,15 +270,13 @@ class UnauthenticatedController extends Controller
                 'pro_slug'     => $v->slug,
             ];
         }
-        return response()->json(['data' => $result, 'meta' => $products]);
+        return response()->json($result);
     }
-
     public function loadMorePagination(Request $request)
     {
-        //dd($request->all());
         $chkCategory = Categorys::where('slug', $request->slug)->select('id', 'parent_id', 'name', 'slug')->first();
         //dd($chkCategory->id);
-        $perPage = 5; // Change this to the number of items per page
+        $perPage = 12; // Change this to the number of items per page
         $page = $request->input('page', 1);
         $products = ProductCategory::where('category_id', $chkCategory->id)
             ->select('product.id', 'categorys.name', 'product.slug', 'product.name as product_name', 'product.thumnail_img', 'product.download_link')
@@ -343,8 +295,8 @@ class UnauthenticatedController extends Controller
                 'pro_slug'     => $v->slug,
             ];
         }
-        
-       // dd($result);
+
+        // dd($result);
         return response()->json(['data' => $result, 'meta' => $products]);
     }
 

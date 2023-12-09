@@ -109,7 +109,12 @@
                                                                     <input type="text" name="keyword" value placeholder="Download" v-model="insertdata.download_link" class="form-control" />
                                                                 </div>
                                                             </div>
-
+                                                            <div class="row mb-3">
+                                                                <label for="input-meta-description-1" class="col-sm-2 col-form-label">Year</label>
+                                                                <div class="col-sm-10">
+                                                                    <input type="text" name="keyword" placeholder="Year" v-model="insertdata.year" class="form-control" />
+                                                                </div>
+                                                            </div>
                                                             <hr>
 
                                                             <div class="row mb-3">
@@ -207,7 +212,8 @@ export default {
                 meta_description: '',
                 meta_keyword: '',
                 product_tag: '',
-                download_link:'',
+                download_link: '',
+                year: '',
                 ptag: '',
                 //files: '',
                 images: '',
@@ -309,7 +315,7 @@ export default {
             this.onFileSelected();
             const file = event.target.files[0];
             this.previewUrl = URL.createObjectURL(file);
-           // this.checkImageDimensionsThunbnail(file);
+            // this.checkImageDimensionsThunbnail(file);
         },
         checkImageDimensionsThunbnail(file) {
             const reader = new FileReader();
@@ -391,6 +397,7 @@ export default {
             formData.append('product_tag', this.insertdata.product_tag);
             formData.append('download_link', this.insertdata.download_link);
             formData.append('status', this.insertdata.status);
+            formData.append('year', this.insertdata.year);
             const headers = {
                 'Content-Type': 'multipart/form-data'
             };

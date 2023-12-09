@@ -43,10 +43,10 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="app_icon_details">
-                        <br/>
+                        <br />
                         <!-- <img :src="thumnail_img" class="img-fluid" loading="lazy" alt=""> -->
                         <!-- <h3>Media Encoder </h3> -->
-                        <button type="button" class="_btn_share mt-3" data-bs-toggle="modal" data-bs-target="#share" @click="shareLink"><i class="fa-solid fa-share-nodes"></i>Share</button>
+                        <button type="button" class="_btn_share mt-3" data-bs-toggle="modal" data-bs-target="#share" @click="shareLink(download_link)"><i class="fa-solid fa-share-nodes"></i>Share</button>
                         <!-- <a href="//telegram.org">Telegram.com</a> :href="download_link"-->
                         <a :href="download_link" class="btn_download" target="_blank">Download</a>
                         <span>Total Download: 9999</span>
@@ -63,6 +63,9 @@
                                                 </div>
                                             </div>
                                             <div>
+                                                <center>
+                                                    <h3 id="copymsg"></h3>
+                                                </center>
                                                 <h6 style="color: #000;">Share this with your social Community</h6>
                                                 <div class="socials">
                                                     <a href="https:/web.whatsapp.com" target="_blank"><img src="/images/whatsapp-100.png" alt=""></a>
@@ -72,9 +75,10 @@
                                             </div>
                                             <div class="copy_link">
                                                 <h6 style="color: #000;">Or copy link : </h6>
+
                                                 <div class="input_box">
-                                                    <input type="text" v-model="fullUrl">
-                                                    <button type="button">Copy </button>
+                                                    <input type="text" v-model="downloadlink" id="linkInput">
+                                                    <button type="button" @click="copyLink()">Copy </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -149,6 +153,7 @@ export default {
     },
     data() {
         return {
+            downloadlink: '',
             popularCategorys: [],
             showLoader: false,
             product_name: '',
@@ -160,7 +165,30 @@ export default {
     },
 
     head: {
-        title: 'Download Software',
+        title: 'Download Course',
+    },
+
+    watch: {
+        async $route(to, from) {
+            try {
+                //const slug = this.$route.query.slug;
+                this.showLoader = true;
+                const response = await this.$axios.get('/unauthenticate/getProductrow', {
+                    params: {
+                        slug: this.$route.query.slug
+                    },
+                });
+                this.showLoader = false;
+                this.product_name = response.data.product_name;
+                this.thumnail_img = response.data.thumnail_img;
+                this.download_link = response.data.download_link;
+                $(".description").html(response.data.description);
+                this.popularProduct(response.data.category_slug);
+
+            } catch (error) {
+                // console.error('Error fetching data:', error);
+            }
+        },
     },
     mounted() {
         setTimeout(() => {
@@ -172,10 +200,22 @@ export default {
 
     },
     methods: {
-        shareLink() {
-            const path = window.location.href;
-            // console.log(path);
-            this.fullUrl = path;
+        copyLink() {
+            $("#copymsg").html();
+            // Select the input field
+            const linkInput = document.getElementById('linkInput');
+            linkInput.select();
+            try {
+                document.execCommand('copy');
+                $("#copymsg").html("Link copied!");
+            } catch (err) {
+                console.error('Unable to copy to clipboard:', err);
+                $("#copymsg").html("Copy to clipboard failed. Please copy the link manually.");
+            }
+        },
+        shareLink(download_link) {
+            console.log("download_link: " + download_link);
+            this.downloadlink = download_link;
 
         },
         async fetchData() {

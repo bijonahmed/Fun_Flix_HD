@@ -53,18 +53,21 @@
                                     <h3>{{ item.product_name }}</h3>
                                     <div class="d-flex align-items-center">
                                         <!--<p>9.99 GB</p>-->
-                                      <nuxt-link :to="'/videos/watch?slug=' + item.pro_slug" class="btn_download">Download</nuxt-link> 
-                                         
+                                        <nuxt-link :to="'/videos/watch?slug=' + item.pro_slug" class="btn_download">Download</nuxt-link>
+
                                     </div>
                                 </div>
                             </nuxt-link>
                         </div>
 
                     </div>
-                         <div class="text-center"> <button @click="loadMore" :disabled="loading" class="load-more-btn text-center">
-                            <span v-if="!loading">Load More</span>
+                    <center>
+                        <button @click="loadMore" :disabled="loading" class="load-more-btn">
+                            <span v-if="!loading && hasMorePages">Load More</span>
                             <span v-else>Loading...</span>
-                        </button></div>
+                        </button>
+                        <p v-if="!loading && !hasMorePages">No more </p>
+                    </center>
                 </div>
                 <div class="col-md-2">
                     <div class="ads_sec mt-0">
@@ -73,7 +76,7 @@
                                 <img src="/images/Neutral_Modern Elegant_Watch_Instagram_Post.png" alt="">
                             </a>
                         </div>
-                       
+
                         <div class="ads_img">
                             <a href="#">
                                 <img src="/images/Neutral_Modern Elegant_Watch_Instagram_Post.png" alt="">
@@ -113,7 +116,8 @@ export default {
             showLoader: false,
             fullUrl: '',
             loading: false,
-            page: 1,
+            currentPage: 1,
+            hasMorePages: true,
             items: [],
         };
     },
@@ -144,18 +148,16 @@ export default {
         setTimeout(() => {
             this.showLoader = false;
         }, 1000);
-        const paramSlug = this.$route.query.slug;
-        console.log("paramSlug: " + paramSlug);
-        await this.loadMore();
-        this.fetchcatData();
-
+        this.laadCategory(this.currentPage);
+        this.fetchItems(this.currentPage);
     },
     methods: {
-        async fetchcatData() {
+        async laadCategory(page) {
             try {
                 const response = await this.$axios.get('/unauthenticate/findCategorys', {
                     params: {
-                        slug: this.$route.query.slug
+                        slug: this.$route.query.slug,
+                        page: page,
                     },
                 });
                 this.categoryname = response.data.categoryname;
@@ -164,24 +166,31 @@ export default {
                 // console.error('Error fetching data:', error);
             }
         },
-        async loadMore() {
-            if (this.loading) return;
+
+        async fetchItems(page) {
             try {
-                this.loading = true;
-                const response = await this.$axios.get('/unauthenticate/videoLoadMorePagination', {
+                const response = await this.$axios.get('/unauthenticate/findCategorys', {
                     params: {
                         slug: this.$route.query.slug,
-                        page: this.page + 1
+                        page: page,
                     },
                 });
+                this.categoryname = response.data.categoryname;
+                const newProducts = response.data.result;
+                if (newProducts.length === 0) {
+                    this.hasMorePages = false;
+                }
+                this.items = this.items.concat(newProducts);
 
-                this.items = this.items.concat(response.data.data); // Assuming your data is nested under 'data' property
-                this.page++;
             } catch (error) {
-                console.error('Error loading more data', error);
-            } finally {
-                this.loading = false;
+                // console.error('Error fetching data:', error);
             }
+        },
+        async loadMore() {
+
+            if (this.loading) return;
+            this.currentPage++;
+            this.fetchItems(this.currentPage);
         },
         shareLink() {
             const path = window.location.href;

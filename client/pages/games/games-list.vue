@@ -61,10 +61,13 @@
     
                         </div>
     
-                        <div class="text-center"> <button @click="loadMore" :disabled="loading" class="load-more-btn text-center">
-                                <span v-if="!loading">Load More</span>
-                                <span v-else>Loading...</span>
-                            </button></div>
+                        <center>
+                        <button @click="loadMore" :disabled="loading" class="load-more-btn">
+                            <span v-if="!loading && hasMorePages">Load More</span>
+                            <span v-else>Loading...</span>
+                        </button>
+                        <p v-if="!loading && !hasMorePages">No more </p>
+                    </center>
     
                     </div>
                     <div class="col-md-2">
@@ -94,129 +97,114 @@
     </div>
     </template>
     
-    <script>
-    import TopBar from '~/components/TopBar.vue';
-    import Support from '~/components/Support.vue';
-    import Footer from '~/components/Footer.vue';
-    
-    export default {
-    
-        components: {
-            TopBar,
-            Support,
-            Footer
-        },
-        data() {
-            return {
-                loading: false,
-                showLoader: false,
-                categoryname: '',
-                page: 1,
-                items: [],
-    
-            };
-        },
-        watch: {
-            async $route(to, from) {
-                try {
-                    //const slug = this.$route.query.slug;
-                    this.showLoader = true;
-                    const response = await this.$axios.get('/unauthenticate/findCategorys', {
-                        params: {
-                            slug: this.$route.query.slug
-                        },
-                    });
-                    this.showLoader = false;
-                    this.items = response.data.result;
-                    this.categoryname = response.data.categoryname;
-                    const category_id = response.data.category_id;
-                    const category_slug = response.data.category_slug;
-                    //alert(category_id);return false; 
-                   if (category_id === 3) {
-                        this.$router.push({
-                            path: '/videos/videodetails',
-                            query: {
-                                slug: category_slug
-                            }
-                        });
-                        return false; 
-                    } else if (category_id === 4) {
-    
-                        this.$router.push({
-                            path: '/course/coursedetails',
-                            query: {
-                                slug: category_slug
-                            }
-                        });
-                    } else {
-                        console.log("categoryID:" + category_id);
-                        return false;
-                    }
-                } catch (error) {
-                    // console.error('Error fetching data:', error);
-                }
-            },
-        },
-        head: {
-            title: 'Category List',
-        },
-        async mounted() {
-            setTimeout(() => {
+<script>
+import TopBar from '~/components/TopBar.vue';
+import Support from '~/components/Support.vue';
+import Footer from '~/components/Footer.vue';
+import Videos from '~/components/Videos.vue';
+
+export default {
+
+    components: {
+        TopBar,
+        Support,
+        Footer,
+        Videos
+    },
+    data() {
+        return {
+            categoryname: '',
+            popularCategorys: [],
+            showLoader: false,
+            fullUrl: '',
+            loading: false,
+            currentPage: 1,
+            hasMorePages: true,
+            items: [],
+        };
+    },
+
+    head: {
+        title: 'Games Zone',
+    },
+    watch: {
+        async $route(to, from) {
+            try {
+                //const slug = this.$route.query.slug;
+                this.showLoader = true;
+                const response = await this.$axios.get('/unauthenticate/findCategorys', {
+                    params: {
+                        slug: this.$route.query.slug
+                    },
+                });
                 this.showLoader = false;
-            }, 1000);
-            const paramSlug = this.$route.query.slug;
-            console.log("paramSlug: " + paramSlug);
-            await this.loadMore();
-            this.fetchcatData();
-    
+                this.items = response.data.result;
+                this.categoryname = response.data.categoryname;
+            } catch (error) {
+                // console.error('Error fetching data:', error);
+            }
         },
-        methods: {
-            async fetchcatData() {
-                try {
-                    const response = await this.$axios.get('/unauthenticate/findCategorys', {
-                        params: {
-                            slug: this.$route.query.slug
-                        },
-                    });
-                    this.items = response.data.result;
-    
-                    this.categoryname = response.data.categoryname;
-    
-                } catch (error) {
-                    // console.error('Error fetching data:', error);
-                }
-            },
-            async loadMore() {
-                if (this.loading) return;
-                try {
-                    this.loading = true;
-                    const response = await this.$axios.get('/unauthenticate/videoLoadMorePagination', {
-                        params: {
-                            slug: this.$route.query.slug,
-                            page: this.page + 1
-                        },
-                    });
-    
-                    this.items = this.items.concat(response.data.data); // Assuming your data is nested under 'data' property
-                    this.page++;
-                } catch (error) {
-                    console.error('Error loading more data', error);
-                } finally {
-                    this.loading = false;
-                }
-            },
-            shareLink() {
-                const path = window.location.href;
-                // console.log(path);
-                this.fullUrl = path;
-    
-            },
-    
-            //end 
+    },
+
+    async mounted() {
+        setTimeout(() => {
+            this.showLoader = false;
+        }, 1000);
+        this.laadCategory(this.currentPage);
+        this.fetchItems(this.currentPage);
+    },
+    methods: {
+        async laadCategory(page) {
+            try {
+                const response = await this.$axios.get('/unauthenticate/findCategorys', {
+                    params: {
+                        slug: this.$route.query.slug,
+                        page: page,
+                    },
+                });
+                this.categoryname = response.data.categoryname;
+
+            } catch (error) {
+                // console.error('Error fetching data:', error);
+            }
         },
-    
-    };
-    </script>
+
+        async fetchItems(page) {
+            try {
+                const response = await this.$axios.get('/unauthenticate/findCategorys', {
+                    params: {
+                        slug: this.$route.query.slug,
+                        page: page,
+                    },
+                });
+                this.categoryname = response.data.categoryname;
+                const newProducts = response.data.result;
+                if (newProducts.length === 0) {
+                    this.hasMorePages = false;
+                }
+                this.items = this.items.concat(newProducts);
+
+            } catch (error) {
+                // console.error('Error fetching data:', error);
+            }
+        },
+        async loadMore() {
+
+            if (this.loading) return;
+            this.currentPage++;
+            this.fetchItems(this.currentPage);
+        },
+        shareLink() {
+            const path = window.location.href;
+            // console.log(path);
+            this.fullUrl = path;
+
+        },
+
+        //end 
+    },
+};
+</script>
     
     <style scoped>
     .load-more-btn {

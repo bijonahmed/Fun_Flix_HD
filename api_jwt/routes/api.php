@@ -185,14 +185,20 @@ Route::group([
     Route::get('limitedProducts', [UnauthenticatedController::class, 'limitedProducts']);
     Route::get('filterCategorys', [UnauthenticatedController::class, 'filterCategory']);
     Route::get('getCategoryList', [UnauthenticatedController::class, 'allCategory']);
-    Route::get('findCategorys', [UnauthenticatedController::class, 'findCategorys']);
+ 
     Route::get('getProductrow', [UnauthenticatedController::class, 'getProductrow']);
     Route::get('get-paginated-products', [UnauthenticatedController::class, 'getPaginatedData']);
     Route::get('defaultShowingProduct', [UnauthenticatedController::class, 'defaultShowingProduct']);
-    Route::get('defaultShowingMovies', [UnauthenticatedController::class, 'defaultShowingMovies']);
+    
+    //Route::get('defaultShowingMovies', [UnauthenticatedController::class, 'defaultShowingMovies']);
+
+    Route::get('defaultShowingMoviesHome', [UnauthenticatedController::class, 'defaultShowingMoviesHome']);
+    Route::get('loadMorePagination', [UnauthenticatedController::class, 'loadMorePagination']);
+    Route::get('findCategorys', [UnauthenticatedController::class, 'findCategorys']);
+
     Route::get('showingMoviesCatWise', [UnauthenticatedController::class, 'showingMoviesCatWise']);
     Route::get('videoPagination', [UnauthenticatedController::class, 'videoPagination']);
-    Route::get('videoLoadMorePagination', [UnauthenticatedController::class, 'loadMorePagination']);
+    Route::get('paginatedMovies', [UnauthenticatedController::class, 'paginatedMovies']);
     Route::get('catloadMorePagination', [UnauthenticatedController::class, 'loadMorePagination']);
     Route::get('filderProduct', [UnauthenticatedController::class, 'filderProduct']);
     Route::get('autocomplete', [UnauthenticatedController::class, 'autocomplete']);

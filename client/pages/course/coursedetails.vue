@@ -6,6 +6,11 @@
     <div class="essential_ cat_banner">
         <div class="container-fluid">
             <div class="row">
+                <div class="loader" v-show="showLoader">
+                    <div class="load_box">
+                        <h6 style="font-weight: 300;">Loading...</h6>
+                    </div>
+                </div>
                 <div class="col-md-12">
                     <div class="essential_box eseheight">
                         <div class="row">
@@ -20,8 +25,7 @@
                                             <a href="#"><img src="///images//Play.png" class="img-fluid" loading="lazy" alt=""></a>
                                             <a href="#"><img src="///images//Apple.png" class="img-fluid" loading="lazy" alt=""></a>
                                         </div>
-                                        <p class="text-end me-3">Download FunFlix HD app for watching popular netflix movies and series for
-                                            free.</p>
+                                        <p class="text-end me-3">There are more than 1000 torrents and tutorials.</p>
                                     </div>
                                     <!-- </div> -->
                                 </div>
@@ -45,6 +49,7 @@
                         <table class="table">
                             <thead>
                                 <tr>
+                                    <th scope="col">SL</th>
                                     <th scope="col">Title</th>
                                     <!-- <th scope="col">Category</th>
                                     <th scope="col">Size</th> -->
@@ -52,11 +57,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="item in items" :key="item.id">
+                                <tr v-for="(item, index) in items" :key="item.id">
+                                     
+                                    <td>{{ index + 1 }}</td> 
                                     <th scope="row"><img src="/images/file-explorer-new-100.png" class="img-fluid me-2" loading="lazy" width="20px" alt="">
                                         {{ item.p_name }}</th>
-                                    <!-- <td>Web Development</td>
-                                    <td>3.5 GB</td> -->
                                     <td>
                                         <div class="btn-group ">
                                             <div class=""><a :href="item.download_link" target="_blank" type="button" class="btn_download btn-sm"><img src="/images/rom-cloud-100(3).png" alt=""> </a></div>
@@ -69,10 +74,13 @@
                             </tbody>
                         </table>
 
-                        <div class="text-center"> <button @click="loadMore" :disabled="loading" class="load-more-btn text-center">
-                                <span v-if="!loading">Load More</span>
+                        <center>
+                            <button @click="loadMore" :disabled="loading" class="load-more-btn">
+                                <span v-if="!loading && hasMorePages">Load More</span>
                                 <span v-else>Loading...</span>
-                            </button></div>
+                            </button>
+                            <p v-if="!loading && !hasMorePages">No more </p>
+                        </center>
                     </div>
 
                 </div>
@@ -104,7 +112,9 @@
                             </div>
                         </div>
                         <div>
-                            <center><h3 id="copymsg"></h3></center>
+                            <center>
+                                <h3 id="copymsg"></h3>
+                            </center>
                             <h6 style="color: #000;">Share this with your social Community</h6>
                             <div class="socials">
                                 <a href="https:/web.whatsapp.com" target="_blank"><img src="/images/whatsapp-100.png" alt=""></a>
@@ -114,6 +124,7 @@
                         </div>
                         <div class="copy_link">
                             <h6 style="color: #000;">Or copy link : </h6>
+
                             <div class="input_box">
                                 <input type="text" v-model="downloadlink" id="linkInput">
                                 <button type="button" @click="copyLink()">Copy </button>
@@ -147,19 +158,20 @@ export default {
     },
     data() {
         return {
-            downloadlink: '',
             categoryname: '',
             popularCategorys: [],
             showLoader: false,
             fullUrl: '',
+            downloadlink:'',
             loading: false,
-            page: 1,
+            currentPage: 1,
+            hasMorePages: true,
             items: [],
         };
     },
 
     head: {
-        title: 'Course',
+        title: 'Popular Torrent Course',
     },
     watch: {
         async $route(to, from) {
@@ -174,7 +186,6 @@ export default {
                 this.showLoader = false;
                 this.items = response.data.result;
                 this.categoryname = response.data.categoryname;
-
             } catch (error) {
                 // console.error('Error fetching data:', error);
             }
@@ -185,11 +196,8 @@ export default {
         setTimeout(() => {
             this.showLoader = false;
         }, 1000);
-        const paramSlug = this.$route.query.slug;
-        console.log("paramSlug: " + paramSlug);
-        await this.loadMore();
-        this.fetchcatData();
-
+        this.laadCategory(this.currentPage);
+        this.fetchItems(this.currentPage);
     },
     methods: {
         copyLink() {
@@ -209,47 +217,51 @@ export default {
             console.log("download_link: " + download_link);
             this.downloadlink = download_link;
         },
-        async fetchcatData() {
-            this.showLoader = true;
+        shareLink() {
+            const path = window.location.href;
+            // console.log(path);
+            this.fullUrl = path;
+
+        },
+        async laadCategory(page) {
             try {
                 const response = await this.$axios.get('/unauthenticate/findCategorys', {
                     params: {
-                        slug: this.$route.query.slug
+                        slug: this.$route.query.slug,
+                        page: page,
                     },
                 });
-                this.showLoader = false;
-                this.categoryname = response.data.categoryname;
-                this.items = response.data.result;
                 this.categoryname = response.data.categoryname;
 
             } catch (error) {
                 // console.error('Error fetching data:', error);
             }
         },
-        async loadMore() {
-            if (this.loading) return;
+
+        async fetchItems(page) {
             try {
-                this.loading = true;
-                const response = await this.$axios.get('/unauthenticate/videoLoadMorePagination', {
+                const response = await this.$axios.get('/unauthenticate/findCategorys', {
                     params: {
                         slug: this.$route.query.slug,
-                        page: this.page + 1
+                        page: page,
                     },
                 });
+                this.categoryname = response.data.categoryname;
+                const newProducts = response.data.result;
+                if (newProducts.length === 0) {
+                    this.hasMorePages = false;
+                }
+                this.items = this.items.concat(newProducts);
 
-                this.items = this.items.concat(response.data.data); // Assuming your data is nested under 'data' property
-                this.page++;
             } catch (error) {
-                console.error('Error loading more data', error);
-            } finally {
-                this.loading = false;
+                // console.error('Error fetching data:', error);
             }
         },
-        shareLink() {
-            const path = window.location.href;
-            // console.log(path);
-            this.fullUrl = path;
+        async loadMore() {
 
+            if (this.loading) return;
+            this.currentPage++;
+            this.fetchItems(this.currentPage);
         },
 
         //end 

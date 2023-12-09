@@ -130,6 +130,12 @@
                                                                     <input type="text" name="keyword" value placeholder="Download" v-model="insertdata.download_link" class="form-control" />
                                                                 </div>
                                                             </div>
+                                                            <div class="row mb-3">
+                                                                <label for="input-meta-description-1" class="col-sm-2 col-form-label">Year</label>
+                                                                <div class="col-sm-10">
+                                                                    <input type="text" name="keyword" placeholder="Year" v-model="insertdata.year" class="form-control" />
+                                                                </div>
+                                                            </div>
                                                             <hr>
 
                                                             <div class="row mb-3">
@@ -238,6 +244,7 @@ export default {
                 description: '',
                 parent_id: 0,
                 download_link:'',
+                year:'',
                 status: '',
 
             },
@@ -347,7 +354,8 @@ export default {
             formData.append('meta_keyword', this.insertdata.meta_keyword);
             formData.append('product_tag', this.insertdata.product_tag);
             formData.append('download_link', this.insertdata.download_link);
-            // formData.append('status', this.insertdata.status);
+            formData.append('status', this.insertdata.status);
+            formData.append('year', this.insertdata.year);
             const headers = {
                 'Content-Type': 'multipart/form-data'
             };
@@ -505,7 +513,7 @@ export default {
                 //console.log("product row:" + response.data);
                 this.insertdata.id = response.data.product.id;
                 this.insertdata.name = response.data.product.name;
-                //  this.insertdata.description = response.data.product.description;
+                 this.insertdata.description = response.data.product.description;
                 this.insertdata.meta_title = response.data.product.meta_title;
                 this.insertdata.meta_description = response.data.product.meta_description;
                 this.insertdata.meta_keyword = response.data.product.meta_keyword;
@@ -513,11 +521,14 @@ export default {
                 this.insertdata.ptag = response.data.product.product_tag;
                 this.insertdata.keyword = response.data.product.keyword;
                 this.insertdata.download_link = response.data.product.download_link;
-                $(".pro_description").html(response.data.product.description);
+                this.insertdata.year = response.data.product.year;
+                
+               // $(".pro_description").html(response.data.product.description);
                 this.insertdata.status = response.data.product.status;
                 this.productImg = response.data.productImg;
                 this.productAddImgs = response.data.product_imgs;
                 this.showProCategories = response.data.product_edit_cat;
+
                 // = response.data.product_cat;
 
             });

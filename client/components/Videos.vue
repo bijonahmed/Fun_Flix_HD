@@ -28,9 +28,12 @@
                                 </div>
                             </div>
                             <center> <button @click="loadMore" :disabled="loading" class="load-more-btn">
-                                    <span v-if="!loading">Load More</span>
+                                    <span v-if="!loading && hasMorePages">Load More</span>
                                     <span v-else>Loading...</span>
-                                </button></center>
+                                  
+                                </button>
+                                <p v-if="!loading && !hasMorePages">No more </p>
+                            </center>
                         </div>
                         <div class="col-md-2">
                             <div class="ads_sec">
@@ -39,7 +42,7 @@
                                         <img src="/images/Neutral_Modern Elegant_Watch_Instagram_Post.png" alt="">
                                     </a>
                                 </div>
-                               
+
                                 <div class="ads_img">
                                     <a href="#">
                                         <img src="/images/Neutral_Modern Elegant_Watch_Instagram_Post.png" alt="">
@@ -65,44 +68,36 @@ export default {
     data() {
         return {
             loading: false,
-            page: 1,
+            currentPage: 1,
+            hasMorePages: true,
             items: [],
         };
     },
     methods: {
-
-        async fetchItems() {
+        async fetchItems(page) {
             try {
-                const response = await this.$axios.get('/unauthenticate/defaultShowingMovies');
-                this.items = response.data;
-                //console.log(response.data);
+                const response = await this.$axios.get(`/unauthenticate/defaultShowingMoviesHome`, {
+                    params: {
+                        page: page
+                    },
+                });
+                const newProducts = response.data;
+                if (newProducts.length === 0) {
+                    this.hasMorePages = false;
+                }
+                this.items = this.items.concat(newProducts);
             } catch (error) {
                 console.error('Error fetching categories:', error);
             }
         },
         async loadMore() {
             if (this.loading) return;
-            try {
-                this.loading = true;
-                const response = await this.$axios.get('/unauthenticate/videoPagination', {
-                    params: {
-                        page: this.page + 1
-                    },
-                });
-
-                this.items = this.items.concat(response.data.data); // Assuming your data is nested under 'data' property
-                this.page++;
-            } catch (error) {
-                console.error('Error loading more data', error);
-            } finally {
-                this.loading = false;
-            }
+            this.currentPage++;
+            this.fetchItems(this.currentPage);
         },
     },
     async mounted() {
-        // Load initial data
-        await this.loadMore();
-        this.fetchItems();
+        this.fetchItems(this.currentPage);
     },
 };
 </script>

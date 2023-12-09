@@ -70,6 +70,7 @@ class ProductController extends Controller
             'manufacturer'               => !empty($request->manufacturer) ? $request->manufacturer : "",
             'manufacturer'               => !empty($request->manufacturer) ? $request->manufacturer : "",
             'download_link'              => !empty($request->download_link) ? $request->download_link : "",
+            'year'                       => !empty($request->year) ? $request->year : "",
             'discount'                   => !empty($request->discount) ? $request->discount : "",
             'discount_status'            => !empty($request->discount_status) ? $request->discount_status : "",
             'shipping_days'              => !empty($request->shipping_days) ? $request->shipping_days : "",
@@ -155,6 +156,7 @@ class ProductController extends Controller
             'meta_keyword'               => !empty($request->meta_keyword) ? $request->meta_keyword : "",
             'product_tag'                => !empty($request->product_tag) ? $request->product_tag : "",
             'download_link'              => !empty($request->download_link) ? $request->download_link : "",
+            'year'                       => !empty($request->year) ? $request->year : "",
             'status'                     => !empty($request->status) ? $request->status : "",
             'entry_by'                   => $this->userid
         );
