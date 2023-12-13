@@ -72,7 +72,8 @@ class UnauthenticatedController extends Controller
         foreach ($data as $v) {
             $result[] = [
                 'id'           => $v->id,
-                'images'       => !empty($v->images) ? $v->images : "",
+                'images'       => !empty($v->images) ? url($v->images) : "",
+                'redirect_url' => $v->redirect_url,
             ];
         }
 

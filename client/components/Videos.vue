@@ -11,7 +11,6 @@
                     <div class="row">
                         <div class="col-md-10">
                             <div class="apps_s_grid">
-
                                 <div class="apps_box_two" v-for="item in items" :key="item.id">
                                     <nuxt-link :to="'/videos/watch?slug=' + item.pro_slug">
                                         <div class="s_img_box">
@@ -27,12 +26,12 @@
                                     </nuxt-link>
                                 </div>
                             </div>
-                            <center> <button @click="loadMore" :disabled="loading" class="load-more-btn">
+                            <center>
+                                <button @click="loadMore" :disabled="loading || !hasMorePages" class="load-more-btn">
                                     <span v-if="!loading && hasMorePages">Load More</span>
-                                    <span v-else>Loading...</span>
-                                  
+                                    <span v-if="loading">Loading...</span>
+                                    <span v-if="!loading && !hasMorePages">No more</span>
                                 </button>
-                                <p v-if="!loading && !hasMorePages">No more </p>
                             </center>
                         </div>
                         <div class="col-md-2">
@@ -64,7 +63,6 @@
 
 <script>
 export default {
-
     data() {
         return {
             loading: false,
@@ -78,7 +76,7 @@ export default {
             try {
                 const response = await this.$axios.get(`/unauthenticate/defaultShowingMoviesHome`, {
                     params: {
-                        page: page
+                        page: page,
                     },
                 });
                 const newProducts = response.data;
@@ -87,17 +85,26 @@ export default {
                 }
                 this.items = this.items.concat(newProducts);
             } catch (error) {
-                console.error('Error fetching categories:', error);
+                console.error('Error fetching items:', error);
             }
         },
         async loadMore() {
-            if (this.loading) return;
-            this.currentPage++;
-            this.fetchItems(this.currentPage);
+            if (this.loading || !this.hasMorePages) return;
+
+            this.loading = true;
+
+            try {
+                this.currentPage++;
+                await this.fetchItems(this.currentPage);
+            } catch (error) {
+                console.error('Error loading more:', error);
+            } finally {
+                this.loading = false;
+            }
         },
     },
     async mounted() {
-        this.fetchItems(this.currentPage);
+        await this.fetchItems(this.currentPage);
     },
 };
 </script>

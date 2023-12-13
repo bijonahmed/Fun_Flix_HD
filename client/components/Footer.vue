@@ -23,9 +23,9 @@
           <div class="social">
             <ul class="justify-content-end">
               <li>
-                <a href="#"> <i class="fa-brands fa-facebook"></i></a>
+                <a href="https://www.facebook.com/funflixhd/" target="_blank"> <i class="fa-brands fa-facebook"></i></a>
               </li>
-              <li>
+              <!-- <li>
                 <a href="#"><i class="fa-brands fa-twitter"></i></a>
               </li>
               <li>
@@ -42,7 +42,7 @@
               </li>
               <li>
                 <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
-              </li>
+              </li> -->
             </ul>
           </div>
         </div>

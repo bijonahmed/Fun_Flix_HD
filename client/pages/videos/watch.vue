@@ -105,8 +105,11 @@
                                                             <div class="copy_link">
                                                                 <h6 style="color: #000;">Or copy link : </h6>
                                                                 <div class="input_box">
-                                                                    <input type="text" v-model="fullUrl">
-                                                                    <button type="button"><i class="fa-regular fa-copy me-2"></i>Copy
+                                                                    <center>
+                                                                        <h3 id="copymsg"></h3>
+                                                                    </center>
+                                                                    <input type="text" v-model="downloadlink" id="linkInput">
+                                                                    <button type="button" @click="copyLink()"><i class="fa-regular fa-copy me-2"></i>Copy
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -160,23 +163,13 @@
 
                     </div>
 
-                    <center> <button @click="loadMore" :disabled="loading" class="load-more-btn">
+                    <center> <button @click="loadMore" :disabled="loading" class="load-more-btn mt-5">
                             <span v-if="!loading">Load More</span>
                             <span v-else>Loading...</span>
                         </button></center>
 
                 </div>
-                <div class="col-md-2">
-                    <div class="ads_sec" style="margin-top: 0 !important;">
-                        <div class="ads_img">
-                            <img src="/images/Neutral_Modern Elegant_Watch_Instagram_Post.png" alt="">
-                        </div>
-                        <div class="ads_img">
-                            <img src="/images/300x600.png" alt="">
-                        </div>
 
-                    </div>
-                </div>
             </div>
 
         </div>
@@ -205,6 +198,9 @@ export default {
     },
     data() {
         return {
+            currentPage: 1,
+            hasMorePages: true,
+            downloadlink:'',
             popularCategorys: [],
             showLoader: false,
             product_name: '',
@@ -233,17 +229,62 @@ export default {
         };
     },
     async mounted() {
+        await this.fetchItems(this.currentPage);
         this.showLoader = true;
         setTimeout(() => {
             this.showLoader = false;
         }, 1000);
         const paramSlug = this.$route.query.slug;
         console.log("paramSlug: " + paramSlug);
-        await this.loadMore();
+        // await this.loadMore();
         this.fetchData();
 
     },
     methods: {
+        copyLink() {
+            $("#copymsg").html();
+            // Select the input field
+            const linkInput = document.getElementById('linkInput');
+            linkInput.select();
+            try {
+                document.execCommand('copy');
+                $("#copymsg").html("Link copied!");
+            } catch (err) {
+                console.error('Unable to copy to clipboard:', err);
+                $("#copymsg").html("Copy to clipboard failed. Please copy the link manually.");
+            }
+        },
+        async fetchItems(page) {
+            try {
+                const response = await this.$axios.get(`/unauthenticate/defaultShowingMoviesHome`, {
+                    params: {
+                        page: page,
+                    },
+                });
+                const newProducts = response.data;
+                if (newProducts.length === 0) {
+                    this.hasMorePages = false;
+                }
+                this.items = this.items.concat(newProducts);
+            } catch (error) {
+                console.error('Error fetching items:', error);
+            }
+        },
+        async loadMore() {
+            if (this.loading || !this.hasMorePages) return;
+
+            this.loading = true;
+
+            try {
+                this.currentPage++;
+                await this.fetchItems(this.currentPage);
+            } catch (error) {
+                console.error('Error loading more:', error);
+            } finally {
+                this.loading = false;
+            }
+        },
+
         async getVideo(slug) {
             window.scrollTo({
                 top: 0,
@@ -270,37 +311,10 @@ export default {
             }
 
         },
-        async fetchItems() {
-            try {
-                const response = await this.$axios.get('/unauthenticate/defaultShowingMovies');
-                this.items = response.data;
-                //console.log(response.data);
-            } catch (error) {
-                console.error('Error fetching categories:', error);
-            }
-        },
-        async loadMore() {
-            if (this.loading) return;
-            try {
-                this.loading = true;
-                const response = await this.$axios.get('/unauthenticate/videoPagination', {
-                    params: {
-                        page: this.page + 1
-                    },
-                });
-
-                this.items = this.items.concat(response.data.data); // Assuming your data is nested under 'data' property
-                this.page++;
-            } catch (error) {
-                console.error('Error loading more data', error);
-            } finally {
-                this.loading = false;
-            }
-        },
         shareLink() {
             const path = window.location.href;
-            // console.log(path);
-            this.fullUrl = path;
+            console.log("===" + path);
+            this.downloadlink = path;
 
         },
         async fetchData() {

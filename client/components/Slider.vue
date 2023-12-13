@@ -1,137 +1,87 @@
 <template>
 <div>
-    <br>
-    <!-- slider part start here  -->
-    <div class="slider_sec">
-        <div id="loader-main" v-show="showLoader">
-            <div id="loader">
-            </div>
+
+    <div id="loader-main" v-show="showLoader">
+        <div id="loader">
         </div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <br/>
-                    <div class="carousel_slider">
-                        <div class="owl-carousel _slide">
-                            <div v-for="(slide, index) in slides" :key="index" class="img_slide">
-                                <img :src="slide.images" class="img-fluid" alt="" loading="lazy" @click="sliderVideoWatch()">
-                            </div>
+    </div>
+    <div class="container-fluid mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="carousel_slider">
+                    <div class="owl-carousel _slide" ref="owlCarousel">
+                        <div v-for="(slide, index) in slides" :key="index" class="img_slide">
+                            <nuxt-link :to="'/videos/watch?slug=' + slide.redirect_url">
+                                <img :src="slide.images" class="img-fluid" :alt="slide.id">
+                            </nuxt-link>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- slider part end here  -->
 </div>
 </template>
 
 <script>
+import 'owl.carousel/dist/assets/owl.carousel.css';
+
 export default {
     data() {
         return {
-            showLoader: true,
+            showLoader: false,
             slides: [],
+            owlCarouselInstance: null,
         };
     },
-    // name: 'Slider', // Make sure the name is specified
+    async mounted() {
+        await this.getSlides();
 
-    mounted() {
-        setTimeout(() => {
-            this.showLoader = false;
-        }, 1000);
-        //inializae 
-        this.getSlides();
-        // Initialize Owl Carousel
-        this.$nextTick(() => {
-            $('.owl-carousel').owlCarousel({
-                loop: true,
-                nav: false,
-                dots: true,
-                margin: 8,
-                autoplay: true,
-                autoplayTimeout: 3000,
-                autoplayHoverPause: true,
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    600: {
-                        items: 1,
-
-                    },
-                    768: {
-                        items: 2,
-
-                    },
-                    992: {
-                        items: 3,
-                    },
-                    1200: {
-                        items: 6,
-                    },
-                    1500: {
-                        items: 6,
-                    }
-                }
-            });
-        });
+        if (process.client) {
+            this.initOwlCarousel();
+        }
     },
     methods: {
-        sliderVideoWatch(){
-           console.log("slider...");
-        },
         async getSlides() {
-            /*
-            const response = await this.$axios.get('/unauthenticate/sliders');
-            return this.slides = response.data;
-            this.slides = response.data;
-            */
-            return this.slides = [{
-                    href: "videos/watch?slug=Movie-1",
-                    images: "/slider_image/01.jpg"
-                },
-                {
-                    href: "/videos/watch?slug=Movie-2",
-                    images: "/slider_image/02.jpg"
-                },
-                {
-                    href: "details.html",
-                    images: "/slider_image/03.jpg"
-                },
-                {
-                    href: "details.html",
-                    images: "/slider_image/04.jpg"
-                },
-                {
-                    href: "details.html",
-                    images: "/slider_image/05.jpg"
-                },
-                {
-                    href: "details.html",
-                    images: "/slider_image/06.jpg"
-                },
-                {
-                    href: "details.html",
-                    images: "/slider_image/07.jpg"
-                },
-                {
-                    href: "details.html",
-                    images: "/slider_image/08.jpg"
-                },
-                {
-                    href: "details.html",
-                    images: "/slider_image/09.jpg"
-                },
-                {
-                    href: "details.html",
-                    images: "/slider_image/10.jpg"
-                },
-
-                // ... add more slides as needed
-            ];
-
+            this.showLoader = true;
+            try {
+                const response = await this.$axios.get('/unauthenticate/sliders');
+                this.slides = response.data;
+            } catch (error) {
+                console.error('Error fetching slides:', error);
+            } finally {
+                this.showLoader = false; // Hide loader after response or error
+            }
         },
-    }
+        initOwlCarousel() {
+            this.$nextTick(() => {
+                this.owlCarouselInstance = $(this.$refs.owlCarousel).owlCarousel({
+                    items: 3,
+                    loop: true,
+                    margin: 10,
+                    autoplay: true,
+                    autoplayTimeout: 3000,
+                    autoplayHoverPause: true,
+                    responsive: {
+                        0: {
+                            items: 1,
+                        },
+                        600: {
+                            items: 3,
+                        },
+                        1000: {
+                            items: 5,
+                        },
+                    },
+                });
+            });
+        },
+    },
+    beforeDestroy() {
+        if (this.owlCarouselInstance) {
+            this.owlCarouselInstance.trigger('destroy.owl.carousel').removeClass('owl-loaded');
+            this.owlCarouselInstance.find('.owl-stage-outer').children().unwrap();
+        }
+    },
 };
 </script>

@@ -85,9 +85,9 @@ export default {
   },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-   //baseURL: "http://127.0.0.1:8000/api",
+  baseURL: "http://127.0.0.1:8000/api",
    //admin link : http://admin.funflixhd.com
-  baseURL: "https://api.funflixhd.com/api",
+ // baseURL: "https://api.funflixhd.com/api",
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
