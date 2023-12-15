@@ -54,7 +54,7 @@
 
                         <div class=" v_slide">
                             <div class="ads_img">
-                                <img src="/images/Neutral_Modern Elegant_Watch_Instagram_Post.png" alt="">
+                                <img :src="thumnail_img" alt="Loading...">
                             </div>
                             <div class="d-flex my-3">
                                 <a href="#"><img src="/images/Play.png" class="img-fluid" loading="lazy" alt=""></a>
@@ -73,7 +73,7 @@
                                 <div class="col-md-12 px-0">
                                     <div class="v_title">
                                         <h2 class="lead">{{ product_name }}</h2>
-                                        <!-- <a href="#" class="btn_download">Download</a> -->
+                                         <a :href="download_link" target="_blank" class="btn_download">Download</a>  
                                         <button type="button" class="_btn_share mt-3" data-bs-toggle="modal" data-bs-target="#share" @click="shareLink"><i class="fa-solid fa-share-nodes"></i>Share</button>
 
                                         <div class="mt-2">

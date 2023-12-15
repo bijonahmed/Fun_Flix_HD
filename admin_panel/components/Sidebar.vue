@@ -258,6 +258,10 @@
                     <li>
                         <Nuxt-link to="/brands/brands-list"><i class="bx bx-right-arrow-alt"></i>Brands</Nuxt-link>
                     </li>
+
+                    <li>
+                        <Nuxt-link to="/sliders/sliders-list"><i class="bx bx-right-arrow-alt"></i>Sliders</Nuxt-link>
+                    </li>
                 </ul>
             </li>
             <li>

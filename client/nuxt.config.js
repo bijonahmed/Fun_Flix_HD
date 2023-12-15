@@ -30,6 +30,7 @@ export default {
       
     ],
     script: [
+      { src: "https://www.googletagmanager.com/gtag/js?id=G-LQRCM2PL91" },
       { src: "https://code.jquery.com/jquery-3.7.1.js" },
       { src: "https://code.jquery.com/ui/1.12.1/jquery-ui.js" },
       { src: "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"},
@@ -52,7 +53,11 @@ export default {
    // '~/plugins/ionicons.js',
     { src: "~plugins/jquery.js", ssr: false }, // Import jQuery
     { src: "~plugins/owl-carousel.js", ssr: false },
+    { src: '~/plugins/google-analytics.js', mode: 'client' }
   ],
+  env: {
+    googleAnalyticsID: 'G-LQRCM2PL91'
+  },
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: false,
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
@@ -85,9 +90,9 @@ export default {
   },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-  baseURL: "http://127.0.0.1:8000/api",
+  //baseURL: "http://127.0.0.1:8000/api",
    //admin link : http://admin.funflixhd.com
- // baseURL: "https://api.funflixhd.com/api",
+  baseURL: "https://api.funflixhd.com/api",
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

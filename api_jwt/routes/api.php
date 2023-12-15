@@ -209,6 +209,10 @@ Route::group([
     'middleware' => 'api',
     'prefix' => 'setting'
 ], function () {
+    //add slider 
+    Route::post('insertSlider', [SettingController::class, 'insertSlider']);
+    Route::get('slidersImages', [SettingController::class, 'slidersImages']);
+        Route::get('sliderrow/{id}', [SettingController::class, 'sliderrow']);
     //emp type
     Route::post('insertEmployeeType', [SettingController::class, 'insertEmployeeType']);
     Route::get('getEmployeeTypeList', [SettingController::class, 'getEmployeeTypeList']);
