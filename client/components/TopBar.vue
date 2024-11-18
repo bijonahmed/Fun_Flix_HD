@@ -28,10 +28,10 @@
                                         <ul v-if="category.children.length > 0" class="dropdown-menu">
                                             <li v-for="childCategory in category.children" :key="childCategory.id">
                                                 <!-- <nuxt-link class="dropdown-item" :to="'/category/category-list?slug=' + childCategory.slug" @click="navigateToCategoryList(childCategory.slug)">{{ childCategory.name }}</nuxt-link> -->
-                                                <nuxt-link v-if="childCategory.parent_id === 1" class="dropdown-item" :to="'/category/category-list?slug=' + childCategory.slug">{{ childCategory.name }}</nuxt-link>
-                                                <nuxt-link v-if="childCategory.parent_id === 2" class="dropdown-item" :to="'/games/games-list?slug=' + childCategory.slug">{{ childCategory.name }}</nuxt-link>
-                                                <nuxt-link v-if="childCategory.parent_id === 3" class="dropdown-item" :to="'/videos/videodetails?slug=' + childCategory.slug">{{ childCategory.name }}</nuxt-link>
-                                                <nuxt-link v-if="childCategory.parent_id === 4" class="dropdown-item" :to="'/course/coursedetails?slug=' + childCategory.slug">{{ childCategory.name }}</nuxt-link>
+                                                <nuxt-link v-if="childCategory.parent_id == 1" class="dropdown-item" :to="'/category/category-list?slug=' + childCategory.slug">{{ childCategory.name }}</nuxt-link>
+                                                <nuxt-link v-if="childCategory.parent_id == 2" class="dropdown-item" :to="'/games/games-list?slug=' + childCategory.slug">{{ childCategory.name }}</nuxt-link>
+                                                <nuxt-link v-if="childCategory.parent_id == 3" class="dropdown-item" :to="'/videos/videodetails?slug=' + childCategory.slug">{{ childCategory.name }}</nuxt-link>
+                                                <nuxt-link v-if="childCategory.parent_id == 4" class="dropdown-item" :to="'/course/coursedetails?slug=' + childCategory.slug">{{ childCategory.name }}</nuxt-link>
                                                 <!-- <nuxt-link v-else class="dropdown-item" :to="'/category/category-list?slug=' + childCategory.slug">{{ childCategory.name }}</nuxt-link> -->
                                             </li>
                                         </ul>
