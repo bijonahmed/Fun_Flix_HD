@@ -243,6 +243,16 @@ class UnauthenticatedController extends Controller
         $data['categoryname']  = $chkCategory->name;
         $data['category_slug'] = $chkCategory->slug;
         $data['category_id']   = $chkCategory->parent_id;
+
+
+        
+
+
+
+
+
+
+
         // dd($data);
         return response()->json($data, 200);
     }

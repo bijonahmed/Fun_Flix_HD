@@ -123,10 +123,7 @@ export default {
             items: [],
         };
     },
-
-    head: {
-        title: 'Games Zone',
-    },
+   
     watch: {
         async $route(to, from) {
             try {
@@ -145,7 +142,41 @@ export default {
             }
         },
     },
+    async asyncData({ $axios }) {
+        try {
+            const response = await $axios.get('/meta-games');
+            console.log("response", response.data);
+            return {
+                meta: response.data, // Save API response
+            };
+        } catch (error) {
+            console.error('Error fetching meta data:', error);
+            return {
+                meta: {}, // Provide a default value if the API call fails
+            };
+        }
+    },
+    head() {
+        const meta = this.meta || {}; // Ensure `this.meta` is not undefined
+        return {
+            title: this.categoryname, // Dynamically set title
+            htmlAttrs: {
+                lang: "en",
+            },
+            meta: [
+                { charset: "utf-8" },
+                { name: "viewport", content: "width=device-width, initial-scale=1" },
+                {
+                    hid: "description",
+                    name: meta.description,
+                    content: meta.keywords || "",
+                   
+                },
+                { name: "format-detection", content: "telephone=no" },
+            ],
 
+        };
+    },
     async mounted() {
         setTimeout(() => {
             this.showLoader = false;

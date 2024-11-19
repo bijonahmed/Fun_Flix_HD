@@ -13,14 +13,14 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
-import nuxt_plugin_httpserver_0a6d94a6 from 'nuxt_plugin_httpserver_0a6d94a6' // Source: .\\http.server.js (mode: 'server')
-import nuxt_plugin_http_6931fe92 from 'nuxt_plugin_http_6931fe92' // Source: .\\http.js (mode: 'all')
-import nuxt_plugin_axios_e996430e from 'nuxt_plugin_axios_e996430e' // Source: .\\axios.js (mode: 'all')
+import nuxt_plugin_httpserver_3c54bbb7 from 'nuxt_plugin_httpserver_3c54bbb7' // Source: .\\http.server.js (mode: 'server')
+import nuxt_plugin_http_4a3c3ac6 from 'nuxt_plugin_http_4a3c3ac6' // Source: .\\http.js (mode: 'all')
+import nuxt_plugin_axios_31f2336c from 'nuxt_plugin_axios_31f2336c' // Source: .\\axios.js (mode: 'all')
 import nuxt_plugin_eventbus_2faefc80 from 'nuxt_plugin_eventbus_2faefc80' // Source: ..\\plugins\\event-bus.js (mode: 'all')
 import nuxt_plugin_jquery_b59486bc from 'nuxt_plugin_jquery_b59486bc' // Source: ..\\plugins\\jquery.js (mode: 'client')
 import nuxt_plugin_owlcarousel_a27871d2 from 'nuxt_plugin_owlcarousel_a27871d2' // Source: ..\\plugins\\owl-carousel.js (mode: 'client')
 import nuxt_plugin_googleanalytics_2bcb2ee2 from 'nuxt_plugin_googleanalytics_2bcb2ee2' // Source: ..\\plugins\\google-analytics.js (mode: 'client')
-import nuxt_plugin_auth_5acc9797 from 'nuxt_plugin_auth_5acc9797' // Source: .\\auth.js (mode: 'all')
+import nuxt_plugin_auth_4cbc5cb4 from 'nuxt_plugin_auth_4cbc5cb4' // Source: .\\auth.js (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -88,7 +88,38 @@ async function createApp(ssrContext, config = {}) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"title":"Welcome to Funflix HD","htmlAttrs":{"lang":"en"},"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"Dive into the world of entertainment and education at FunFlixHD.com! \n      Explore the latest movies, cutting-edge software, thrilling games, \n      and enriching courses. Your gateway to endless possibilities for leisure and learning awaits!"},{"name":"format-detection","content":"telephone=no"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Flogo.png"},{"rel":"stylesheet","href":"https:\u002F\u002Fcdn.jsdelivr.net\u002Fnpm\u002Fbootstrap@5.3.0\u002Fdist\u002Fcss\u002Fbootstrap.min.css"},{"rel":"stylesheet","href":"https:\u002F\u002Fcdnjs.cloudflare.com\u002Fajax\u002Flibs\u002Ffont-awesome\u002F6.4.0\u002Fcss\u002Fall.min.css"},{"rel":"stylesheet","href":"https:\u002F\u002Fcode.jquery.com\u002Fui\u002F1.12.1\u002Fthemes\u002Fbase\u002Fjquery-ui.css"},{"rel":"stylesheet","href":"\u002Fcss\u002Fowl.carousel.min.css"},{"rel":"stylesheet","href":"\u002Fcss\u002Fowl.theme.default.min.css"},{"rel":"stylesheet","href":"\u002Fcss\u002Froot.css"},{"rel":"stylesheet","href":"\u002Fcss\u002Fstyles.css"},{"rel":"preconnect","href":"https:\u002F\u002Ffonts.googleapis.com"},{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss2?family=YourFontFamily&display=swap"},{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss2?family=Fugaz+One&display=swap"}],"script":[{"src":"https:\u002F\u002Fwww.googletagmanager.com\u002Fgtag\u002Fjs?id=G-LQRCM2PL91"},{"src":"https:\u002F\u002Fcode.jquery.com\u002Fjquery-3.7.1.js"},{"src":"https:\u002F\u002Fcode.jquery.com\u002Fui\u002F1.12.1\u002Fjquery-ui.js"},{"src":"https:\u002F\u002Fcdn.jsdelivr.net\u002Fnpm\u002Fbootstrap@5.3.0\u002Fdist\u002Fjs\u002Fbootstrap.bundle.min.js"},{"src":"https:\u002F\u002Fcdnjs.cloudflare.com\u002Fajax\u002Flibs\u002Fpopper.js\u002F1.14.3\u002Fumd\u002Fpopper.min.js"},{"src":"https:\u002F\u002Fcdn.jsdelivr.net\u002Fnpm\u002Fsweetalert2@11"},{"src":"\u002Fjs\u002Fowl.carousel.min.js"},{"src":"\u002Fjs\u002Fnav_Sidebar.js"},{"src":"\u002Fjs\u002FbackToTop.js"}],"style":[]},
+    head: function() {
+    const meta = this.meta || {}; // Ensure `this.meta` is not undefined
+    return {
+      title: meta.title || "", // Dynamically set title
+      htmlAttrs: {
+        lang: "en"
+      },
+      link: [
+      { rel: "icon", type: "image/x-icon", href: "/logo.png" },
+      { rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" },
+      { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" },
+      { rel: "stylesheet", href: "https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" },
+      { rel: "stylesheet", href: "/css/owl.carousel.min.css" },
+      { rel: "stylesheet", href: "/css/owl.theme.default.min.css" },
+      { rel: "stylesheet", href: "/css/root.css" },
+      { rel: "stylesheet", href: "/css/styles.css" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=YourFontFamily&display=swap" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" }],
+
+      script: [
+      { src: "https://www.googletagmanager.com/gtag/js?id=G-LQRCM2PL91" },
+      { src: "https://code.jquery.com/jquery-3.7.1.js" },
+      { src: "https://code.jquery.com/ui/1.12.1/jquery-ui.js" },
+      { src: "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" },
+      { src: "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" },
+      { src: "https://cdn.jsdelivr.net/npm/sweetalert2@11" },
+      { src: "/js/owl.carousel.min.js" },
+      { src: "/js/nav_Sidebar.js" },
+      { src: "/js/backToTop.js" }]
+    };
+  },
 
     store,
     router,
@@ -218,16 +249,16 @@ async function createApp(ssrContext, config = {}) {
   }
   // Plugin execution
 
-  if (process.server && typeof nuxt_plugin_httpserver_0a6d94a6 === 'function') {
-    await nuxt_plugin_httpserver_0a6d94a6(app.context, inject)
+  if (process.server && typeof nuxt_plugin_httpserver_3c54bbb7 === 'function') {
+    await nuxt_plugin_httpserver_3c54bbb7(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_http_6931fe92 === 'function') {
-    await nuxt_plugin_http_6931fe92(app.context, inject)
+  if (typeof nuxt_plugin_http_4a3c3ac6 === 'function') {
+    await nuxt_plugin_http_4a3c3ac6(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_axios_e996430e === 'function') {
-    await nuxt_plugin_axios_e996430e(app.context, inject)
+  if (typeof nuxt_plugin_axios_31f2336c === 'function') {
+    await nuxt_plugin_axios_31f2336c(app.context, inject)
   }
 
   if (typeof nuxt_plugin_eventbus_2faefc80 === 'function') {
@@ -246,8 +277,8 @@ async function createApp(ssrContext, config = {}) {
     await nuxt_plugin_googleanalytics_2bcb2ee2(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_auth_5acc9797 === 'function') {
-    await nuxt_plugin_auth_5acc9797(app.context, inject)
+  if (typeof nuxt_plugin_auth_4cbc5cb4 === 'function') {
+    await nuxt_plugin_auth_4cbc5cb4(app.context, inject)
   }
 
   // Lock enablePreview in context

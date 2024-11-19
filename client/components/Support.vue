@@ -21,7 +21,7 @@
     <!-- support part end here  -->
 
     <!-- grow your busines part start here  -->
-    <section class="grow_business">
+    <section class="grow_business d-none">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 m-auto text-center ">

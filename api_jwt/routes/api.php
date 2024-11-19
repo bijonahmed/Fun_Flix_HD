@@ -18,6 +18,7 @@ use App\Http\Controllers\Manufacturer\ManufacturesController;
 use App\Http\Controllers\Brands\BrandsController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Cart\CartController;
+use App\Http\Controllers\Meta\MetaController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,6 +29,11 @@ use App\Http\Controllers\Cart\CartController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::get('/meta', [MetaController::class, 'getMeta']);
+Route::get('/meta-category', [MetaController::class, 'metaCategory']);
+Route::get('/meta-games', [MetaController::class, 'metaGames']);
+Route::get('/meta-videos', [MetaController::class, 'metaVideos']);
+Route::get('/meta-courses', [MetaController::class, 'metaCourses']);
 
 Route::group([
     'middleware' => 'api',
