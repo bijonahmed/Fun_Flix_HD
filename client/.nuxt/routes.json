@@ -3,98 +3,84 @@
     "name": "apps",
     "path": "/apps",
     "component": "D:\\\\xampp\\\\htdocs\\\\apps\\\\fun_flix_hd\\\\client\\\\pages\\\\apps.vue",
-    "chunkName": "pages/apps",
-    "_name": "_001f514e"
+    "chunkName": "pages/apps"
   },
   {
     "name": "login",
     "path": "/login",
     "component": "D:\\\\xampp\\\\htdocs\\\\apps\\\\fun_flix_hd\\\\client\\\\pages\\\\login.vue",
-    "chunkName": "pages/login",
-    "_name": "_111710bd"
+    "chunkName": "pages/login"
   },
   {
     "name": "phrase",
     "path": "/phrase",
     "component": "D:\\\\xampp\\\\htdocs\\\\apps\\\\fun_flix_hd\\\\client\\\\pages\\\\phrase.vue",
-    "chunkName": "pages/phrase",
-    "_name": "_a0092dd6"
+    "chunkName": "pages/phrase"
   },
   {
     "name": "privacy-alert",
     "path": "/privacy-alert",
     "component": "D:\\\\xampp\\\\htdocs\\\\apps\\\\fun_flix_hd\\\\client\\\\pages\\\\privacy-alert.vue",
-    "chunkName": "pages/privacy-alert",
-    "_name": "_ec628daa"
+    "chunkName": "pages/privacy-alert"
   },
   {
     "name": "recover-identity",
     "path": "/recover-identity",
     "component": "D:\\\\xampp\\\\htdocs\\\\apps\\\\fun_flix_hd\\\\client\\\\pages\\\\recover-identity.vue",
-    "chunkName": "pages/recover-identity",
-    "_name": "_5035f53a"
+    "chunkName": "pages/recover-identity"
   },
   {
     "name": "update-password",
     "path": "/update-password",
     "component": "D:\\\\xampp\\\\htdocs\\\\apps\\\\fun_flix_hd\\\\client\\\\pages\\\\update-password.vue",
-    "chunkName": "pages/update-password",
-    "_name": "_d1c75b1a"
+    "chunkName": "pages/update-password"
   },
   {
     "name": "category-category-list",
     "path": "/category/category-list",
     "component": "D:\\\\xampp\\\\htdocs\\\\apps\\\\fun_flix_hd\\\\client\\\\pages\\\\category\\\\category-list.vue",
-    "chunkName": "pages/category/category-list",
-    "_name": "_b71491ba"
+    "chunkName": "pages/category/category-list"
   },
   {
     "name": "category-download",
     "path": "/category/download",
     "component": "D:\\\\xampp\\\\htdocs\\\\apps\\\\fun_flix_hd\\\\client\\\\pages\\\\category\\\\download.vue",
-    "chunkName": "pages/category/download",
-    "_name": "_6fbcc162"
+    "chunkName": "pages/category/download"
   },
   {
     "name": "course-coursedetails",
     "path": "/course/coursedetails",
     "component": "D:\\\\xampp\\\\htdocs\\\\apps\\\\fun_flix_hd\\\\client\\\\pages\\\\course\\\\coursedetails.vue",
-    "chunkName": "pages/course/coursedetails",
-    "_name": "_72048ec0"
+    "chunkName": "pages/course/coursedetails"
   },
   {
     "name": "course-download",
     "path": "/course/download",
     "component": "D:\\\\xampp\\\\htdocs\\\\apps\\\\fun_flix_hd\\\\client\\\\pages\\\\course\\\\download.vue",
-    "chunkName": "pages/course/download",
-    "_name": "_17e76ebf"
+    "chunkName": "pages/course/download"
   },
   {
     "name": "games-games-list",
     "path": "/games/games-list",
     "component": "D:\\\\xampp\\\\htdocs\\\\apps\\\\fun_flix_hd\\\\client\\\\pages\\\\games\\\\games-list.vue",
-    "chunkName": "pages/games/games-list",
-    "_name": "_4cb38b3f"
+    "chunkName": "pages/games/games-list"
   },
   {
     "name": "videos-videodetails",
     "path": "/videos/videodetails",
     "component": "D:\\\\xampp\\\\htdocs\\\\apps\\\\fun_flix_hd\\\\client\\\\pages\\\\videos\\\\videodetails.vue",
-    "chunkName": "pages/videos/videodetails",
-    "_name": "_3f814a9b"
+    "chunkName": "pages/videos/videodetails"
   },
   {
     "name": "videos-watch",
     "path": "/videos/watch",
     "component": "D:\\\\xampp\\\\htdocs\\\\apps\\\\fun_flix_hd\\\\client\\\\pages\\\\videos\\\\watch.vue",
-    "chunkName": "pages/videos/watch",
-    "_name": "_f223ad6a"
+    "chunkName": "pages/videos/watch"
   },
   {
     "name": "index",
     "path": "/",
     "component": "D:\\\\xampp\\\\htdocs\\\\apps\\\\fun_flix_hd\\\\client\\\\pages\\\\index.vue",
-    "chunkName": "pages/index",
-    "_name": "_476f6da6"
+    "chunkName": "pages/index"
   }
 ]

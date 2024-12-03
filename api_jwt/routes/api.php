@@ -34,6 +34,7 @@ Route::get('/meta-category', [MetaController::class, 'metaCategory']);
 Route::get('/meta-games', [MetaController::class, 'metaGames']);
 Route::get('/meta-videos', [MetaController::class, 'metaVideos']);
 Route::get('/meta-courses', [MetaController::class, 'metaCourses']);
+Route::get('/findseorow', [MetaController::class, 'findseorow']);
 
 Route::group([
     'middleware' => 'api',
@@ -216,6 +217,7 @@ Route::group([
     'prefix' => 'setting'
 ], function () {
     //add slider 
+    Route::post('updateSeoSetting', [SettingController::class, 'updateSeoSetting']);
     Route::post('insertSlider', [SettingController::class, 'insertSlider']);
     Route::get('slidersImages', [SettingController::class, 'slidersImages']);
         Route::get('sliderrow/{id}', [SettingController::class, 'sliderrow']);

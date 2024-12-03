@@ -1,9 +1,26 @@
 <template>
 <div class="page-wrapper" v-if="$auth.loggedIn">
     <div class="page-content">
-        <span v-if="userData.role_id === 1">
+        <span v-if="userData.role_id == 1">
             <div class="row row-cols-1 row-cols-md-2 row-cols-xl-5">
 
+
+                <div class="col">
+                    <div class="card radius-10 bg-gradient-orange">
+                        <Nuxt-link to="/setting/seo_setting">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="d-flex align-items-center text-white">
+                                        <p class="mb-0">SEO Setting</p>
+                                    </div>
+                                    <div class="ms-auto">
+                                        <i class='bx bx-envelope fs-3 text-white'></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </Nuxt-link>
+                    </div>
+                </div>
 
                 <div class="col">
                     <div class="card radius-10 bg-gradient-deepblue">
@@ -21,6 +38,7 @@
                         </Nuxt-link>
                     </div>
                 </div>
+                
                 
             </div>
         </span>

@@ -10,6 +10,7 @@ use Helper;
 use App\Models\User;
 use App\Models\Setting;
 use App\Models\Profile;
+use App\Models\SeoSetting;
 use App\Models\Sliders;
 use Illuminate\Support\Str;
 use App\Rules\MatchOldPassword;
@@ -76,6 +77,34 @@ class SettingController extends Controller
         ];
         return response()->json($response);
     }
+
+
+
+    public function updateSeoSetting(Request $request)
+    {
+
+        $data = array(
+            'index_pages_description'  => !empty($request->index_pages_description) ? $request->index_pages_description : "",
+            'index_pages_keywords'     => !empty($request->index_pages_keywords) ? $request->index_pages_keywords : "",
+
+            'category_pages_description'=> !empty($request->category_pages_description) ? $request->category_pages_description : "",
+            'category_pages_keywords'   => !empty($request->category_pages_keywords) ? $request->category_pages_keywords : "",
+
+            'games_pages_description'   => !empty($request->games_pages_description) ? $request->games_pages_description : "",
+            'games_pages_keywords'      => !empty($request->games_pages_keywords) ? $request->games_pages_keywords : "",
+
+            'videos_pages_description'  => !empty($request->videos_pages_description) ? $request->videos_pages_description : "",
+            'videos_pages_keywords'     => !empty($request->videos_pages_keywords) ? $request->videos_pages_keywords : "",
+
+            'course_pages_description'  => !empty($request->course_pages_description) ? $request->course_pages_description : "",
+            'course_pages_keywords'     => !empty($request->course_pages_keywords) ? $request->course_pages_keywords : "",
+        );
+
+       SeoSetting::where('id', 1)->update($data);
+    }
+
+
+
     public function insertEmployeeType(Request $request)
     {
         $validator = Validator::make($request->all(), [

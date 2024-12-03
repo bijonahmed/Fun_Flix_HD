@@ -1,0 +1,37 @@
+{
+  "entry": "server.js",
+  "files": {
+    "pages/apps.js": "pages/apps.js",
+    "pages/category/category-list.js": "pages/category/category-list.js",
+    "pages/category/download.js": "pages/category/download.js",
+    "pages/course/coursedetails.js": "pages/course/coursedetails.js",
+    "pages/course/download.js": "pages/course/download.js",
+    "pages/games/games-list.js": "pages/games/games-list.js",
+    "pages/index.js": "pages/index.js",
+    "pages/login.js": "pages/login.js",
+    "pages/phrase.js": "pages/phrase.js",
+    "pages/privacy-alert.js": "pages/privacy-alert.js",
+    "pages/recover-identity.js": "pages/recover-identity.js",
+    "pages/update-password.js": "pages/update-password.js",
+    "pages/videos/videodetails.js": "pages/videos/videodetails.js",
+    "pages/videos/watch.js": "pages/videos/watch.js",
+    "server.js": "server.js"
+  },
+  "maps": {
+    "pages/apps.js": "pages/apps.js.map",
+    "pages/category/category-list.js": "pages/category/category-list.js.map",
+    "pages/category/download.js": "pages/category/download.js.map",
+    "pages/course/coursedetails.js": "pages/course/coursedetails.js.map",
+    "pages/course/download.js": "pages/course/download.js.map",
+    "pages/games/games-list.js": "pages/games/games-list.js.map",
+    "pages/index.js": "pages/index.js.map",
+    "pages/login.js": "pages/login.js.map",
+    "pages/phrase.js": "pages/phrase.js.map",
+    "pages/privacy-alert.js": "pages/privacy-alert.js.map",
+    "pages/recover-identity.js": "pages/recover-identity.js.map",
+    "pages/update-password.js": "pages/update-password.js.map",
+    "pages/videos/videodetails.js": "pages/videos/videodetails.js.map",
+    "pages/videos/watch.js": "pages/videos/watch.js.map",
+    "server.js": "server.js.map"
+  }
+}
